@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
 import './BlogPostCar.css';
@@ -6,6 +7,7 @@ const TAGS = ['Three.js', 'WebGL', '3D', 'JavaScript', 'Portfolio'];
 
 export default function BlogPostCar() {
   const ref = useReveal(0.05);
+  const [widgetState, setWidgetState] = useState('normal');
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -18,6 +20,14 @@ export default function BlogPostCar() {
     navigate('/');
     window.scrollTo(0, 0);
   };
+
+  const handleRed    = () => setWidgetState(s => s === 'collapsed'  ? 'normal' : 'collapsed');
+  const handleYellow = () => setWidgetState(s => s === 'mini'       ? 'normal' : 'mini');
+  const handleGreen  = () => setWidgetState(s => s === 'fullscreen' ? 'normal' : 'fullscreen');
+
+  const iframeHeight = widgetState === 'mini' ? 200 : 500;
+  const isCollapsed  = widgetState === 'collapsed';
+  const isFullscreen = widgetState === 'fullscreen';
 
   return (
     <article id="blog-post-car" ref={ref}>
@@ -41,6 +51,54 @@ export default function BlogPostCar() {
         </header>
 
         <div className="post-body reveal reveal-delay-3">
+
+          {/* ── Live demo — top of post ── */}
+          <div className={`demo-widget${isFullscreen ? ' demo-widget-fullscreen' : ''}`}>
+            <div className="demo-widget-bar">
+              <button
+                className="demo-dot demo-dot-red"
+                onClick={handleRed}
+                title={isCollapsed ? 'Expand' : 'Collapse'}
+                aria-label={isCollapsed ? 'Expand demo' : 'Collapse demo'}
+              />
+              <button
+                className="demo-dot demo-dot-yellow"
+                onClick={handleYellow}
+                title={widgetState === 'mini' ? 'Normal size' : 'Mini view'}
+                aria-label="Toggle mini view"
+              />
+              <button
+                className="demo-dot demo-dot-green"
+                onClick={handleGreen}
+                title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+                aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              />
+              <span className="demo-widget-title">gt3rs-configurator.html</span>
+              {isFullscreen && (
+                <button
+                  className="demo-widget-close"
+                  onClick={() => setWidgetState('normal')}
+                  aria-label="Close fullscreen"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            {!isCollapsed && (
+              <iframe
+                src="/gt3rs-configurator.html"
+                style={{
+                  width: '100%',
+                  height: isFullscreen ? undefined : iframeHeight,
+                  border: 'none',
+                  borderRadius: isFullscreen ? '0' : '0 0 10px 10px',
+                  display: 'block',
+                }}
+                title="GT3 RS 3D Configurator"
+              />
+            )}
+          </div>
+
           <p>
             I've been building a lot of web apps lately — forms, dashboards, trading tools — and I
             noticed the portfolio was starting to look like just another list of CRUD apps. Fine for
@@ -230,22 +288,6 @@ camera.lookAt(interiorLookAt);`}</code></pre>
             floor, ambient lighting rig. Make it feel like you're standing in a showroom instead of
             floating in the portfolio gradient.
           </p>
-
-          <div className="demo-widget">
-            <div className="demo-widget-bar">
-              <span className="demo-dot demo-dot-red" />
-              <span className="demo-dot demo-dot-yellow" />
-              <span className="demo-dot demo-dot-green" />
-              <span className="demo-widget-title">gt3rs-configurator.html</span>
-            </div>
-            <div className="demo-widget-body">
-              <p className="demo-placeholder">[ Live 3D Demo — gt3rs-configurator.html ]</p>
-              <p className="demo-instructions">
-                Drop the configurator HTML + GLB in the same folder and run locally with{' '}
-                <code>npx serve .</code>
-              </p>
-            </div>
-          </div>
         </div>
 
         <nav className="post-nav">

@@ -146,12 +146,13 @@
   border-radius: 0;
 }
 
-/* Demo widget */
+/* ── Demo widget ─────────────────────────────────────────────────────────── */
+
 .demo-widget {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin: 44px 0 8px;
+  margin: 0 0 48px;
   background: rgba(6, 12, 8, 0.96);
 }
 
@@ -164,10 +165,20 @@
   border-bottom: 1px solid var(--border);
 }
 
+/* Dots are now <button> elements */
 .demo-dot {
   width: 11px;
   height: 11px;
   border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.demo-dot:hover {
+  opacity: 0.75;
+  transform: scale(1.15);
 }
 .demo-dot-red    { background: #ff5f57; }
 .demo-dot-yellow { background: #febc2e; }
@@ -181,36 +192,43 @@
   letter-spacing: 0.03em;
 }
 
-.demo-widget-body {
-  padding: 44px 24px;
+/* Close button — only visible in fullscreen, pushed to the right */
+.demo-widget-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  line-height: 1;
+  transition: color var(--transition), background var(--transition);
+}
+.demo-widget-close:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Fullscreen overlay */
+.demo-widget-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  border-radius: 0;
+  margin: 0;
+  border: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  text-align: center;
 }
-
-.demo-placeholder {
-  font-family: var(--font-mono);
-  font-size: 0.92rem;
-  color: var(--accent);
-  letter-spacing: 0.04em;
+.demo-widget-fullscreen .demo-widget-bar {
+  flex-shrink: 0;
 }
-
-.demo-instructions {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  max-width: 400px;
-}
-
-.demo-instructions code {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  padding: 2px 7px;
-  border-radius: 4px;
+.demo-widget-fullscreen iframe {
+  flex: 1;
+  /* override the inline borderRadius when fullscreen */
+  border-radius: 0 !important;
 }
 
 /* Post bottom nav */
@@ -239,5 +257,4 @@
   .post-wrapper { padding: 60px 20px 80px; }
   .post-title { margin-bottom: 36px; }
   .code-block { padding: 16px; font-size: 0.77rem; }
-  .demo-widget-body { padding: 32px 20px; }
 }
