@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
 import './BlogPostCar.css';
@@ -7,7 +7,7 @@ const TAGS = ['Three.js', 'WebGL', '3D', 'JavaScript', 'Portfolio'];
 
 export default function BlogPostCar() {
   const ref = useReveal(0.05);
-  const [widgetState, setWidgetState] = useState('normal');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -21,13 +21,12 @@ export default function BlogPostCar() {
     window.scrollTo(0, 0);
   };
 
-  const handleRed    = () => setWidgetState(s => s === 'collapsed'  ? 'normal' : 'collapsed');
-  const handleYellow = () => setWidgetState(s => s === 'mini'       ? 'normal' : 'mini');
-  const handleGreen  = () => setWidgetState(s => s === 'fullscreen' ? 'normal' : 'fullscreen');
-
-  const iframeHeight = widgetState === 'mini' ? 200 : 500;
-  const isCollapsed  = widgetState === 'collapsed';
-  const isFullscreen = widgetState === 'fullscreen';
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setIsOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen]);
 
   return (
     <article id="blog-post-car" ref={ref}>
@@ -52,52 +51,82 @@ export default function BlogPostCar() {
 
         <div className="post-body reveal reveal-delay-3">
 
-          {/* ── Live demo — top of post ── */}
-          <div className={`demo-widget${isFullscreen ? ' demo-widget-fullscreen' : ''}`}>
+          {/* ── Thumbnail — no iframe until opened ── */}
+          <div className="demo-widget">
             <div className="demo-widget-bar">
               <button
-                className="demo-dot demo-dot-red"
-                onClick={handleRed}
-                title={isCollapsed ? 'Expand' : 'Collapse'}
-                aria-label={isCollapsed ? 'Expand demo' : 'Collapse demo'}
+                className="demo-dot demo-dot-red demo-dot-inert"
+                title="Demo only runs fullscreen"
+                type="button"
               />
               <button
-                className="demo-dot demo-dot-yellow"
-                onClick={handleYellow}
-                title={widgetState === 'mini' ? 'Normal size' : 'Mini view'}
-                aria-label="Toggle mini view"
+                className="demo-dot demo-dot-yellow demo-dot-inert"
+                title="Demo only runs fullscreen"
+                type="button"
               />
               <button
                 className="demo-dot demo-dot-green"
-                onClick={handleGreen}
-                title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
-                aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+                onClick={() => setIsOpen(true)}
+                title="Launch demo"
+                aria-label="Launch demo"
+                type="button"
               />
               <span className="demo-widget-title">gt3rs-configurator.html</span>
-              {isFullscreen && (
-                <button
-                  className="demo-widget-close"
-                  onClick={() => setWidgetState('normal')}
-                  aria-label="Close fullscreen"
-                >
-                  ✕
-                </button>
-              )}
             </div>
-            {!isCollapsed && (
-              <iframe
-                src="/gt3rs-configurator.html"
-                style={{
-                  width: '100%',
-                  height: isFullscreen ? undefined : iframeHeight,
-                  border: 'none',
-                  borderRadius: isFullscreen ? '0' : '0 0 10px 10px',
-                  display: 'block',
-                }}
-                title="GT3 RS 3D Configurator"
-              />
-            )}
+            <button
+              className="demo-widget-preview"
+              onClick={() => setIsOpen(true)}
+              aria-label="Launch 911 GT3 RS demo"
+              type="button"
+            >
+              <span className="demo-car-title">911 GT3 RS</span>
+              <span className="demo-launch-btn">▶ Launch Demo</span>
+            </button>
           </div>
+
+          {/* ── Modal — iframe only mounts when open ── */}
+          {isOpen && (
+            <div
+              className="demo-modal-backdrop"
+              onClick={() => setIsOpen(false)}
+            >
+              <div className="demo-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="demo-widget-bar">
+                  <button
+                    className="demo-dot demo-dot-red"
+                    onClick={() => setIsOpen(false)}
+                    title="Close"
+                    aria-label="Close demo"
+                    type="button"
+                  />
+                  <button
+                    className="demo-dot demo-dot-yellow demo-dot-inert"
+                    title="Demo only runs fullscreen"
+                    type="button"
+                  />
+                  <button
+                    className="demo-dot demo-dot-green demo-dot-inert"
+                    title="Currently fullscreen"
+                    type="button"
+                  />
+                  <span className="demo-widget-title">gt3rs-configurator.html</span>
+                  <button
+                    className="demo-widget-close"
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Close demo"
+                    type="button"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <iframe
+                  src="/gt3rs-configurator.html"
+                  style={{ width: '100%', height: 'calc(100vh - 42px)', border: 'none', display: 'block' }}
+                  title="GT3 RS 3D Configurator"
+                />
+              </div>
+            </div>
+          )}
 
           <p>
             I've been building a lot of web apps lately — forms, dashboards, trading tools — and I
