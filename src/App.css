@@ -3,12 +3,23 @@
 #services,
 #clients,
 #projects,
+#blog-preview,
 #stack,
 #contact {
   background: rgba(6, 12, 8, 0.84);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   border-top: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  z-index: 1;
+}
+
+/* Blog pages — same backdrop but no top border (they're full pages, not sections in a stack) */
+#blog-page,
+#blog-post-car {
+  background: rgba(6, 12, 8, 0.84);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   position: relative;
   z-index: 1;
 }

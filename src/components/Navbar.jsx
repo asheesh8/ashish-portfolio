@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { navigate } from '../router';
 import './Navbar.css';
 
-const links = ['about', 'services', 'projects', 'stack', 'contact'];
+const SECTION_LINKS = ['about', 'services', 'projects', 'stack', 'contact'];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,28 +14,48 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleLink = (id) => {
+  const handleSectionLink = (id) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    if (window.location.pathname === '/') {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#' + id;
+    }
+  };
+
+  const handleBlog = () => {
+    setMenuOpen(false);
+    navigate('/blog');
+    window.scrollTo(0, 0);
+  };
+
+  const handleHome = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    navigate('/');
+    window.scrollTo(0, 0);
   };
 
   return (
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="navbar-inner">
-        <a className="navbar-logo" href="#hero" onClick={() => handleLink('hero')}>
+        <a className="navbar-logo" href="/" onClick={handleHome}>
           <span className="logo-bracket">&lt;</span>Ashish<span className="logo-bracket">/&gt;</span>
         </a>
 
         <ul className={`navbar-links${menuOpen ? ' open' : ''}`}>
-          {links.map((id) => (
+          {SECTION_LINKS.map((id) => (
             <li key={id}>
-              <button onClick={() => handleLink(id)}>{id}</button>
+              <button onClick={() => handleSectionLink(id)}>{id}</button>
             </li>
           ))}
           <li>
+            <button onClick={handleBlog}>blog</button>
+          </li>
+          <li>
             <a
               className="btn-hire"
-              href="mailto:ashish@example.com"
+              href="mailto:subediashish31@gmail.com"
               onClick={() => setMenuOpen(false)}
             >
               Hire Me
