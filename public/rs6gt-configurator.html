@@ -106,6 +106,27 @@ body {
   background: rgba(255,255,255,.15);
   border-color: rgba(255,255,255,.35); color: #fff;
 }
+.package-toggle {
+  position: absolute; top: calc(50% + 92px); right: 32px;
+  z-index: 10; display: flex; flex-direction: column; gap: 8px;
+}
+.package-label {
+  font-size: 9px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); text-align: right;
+}
+.package-btn {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.55);
+  padding: 9px 14px; border-radius: 8px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  backdrop-filter: blur(8px); transition: all .2s;
+}
+.package-btn.active {
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.35); color: #fff;
+}
 
 /* specs */
 .specs { display: flex; gap: 28px; align-items: flex-end; }
@@ -146,6 +167,8 @@ body {
   .car-name { font-size: 40px; }
   .view-toggle { right: 12px; }
   .view-btn { padding: 8px 12px; font-size: 10px; }
+  .package-toggle { top: auto; right: 20px; bottom: 116px; }
+  .package-btn { padding: 7px 10px; font-size: 9px; }
 }
 </style>
 </head>
@@ -190,6 +213,12 @@ body {
   <div class="view-toggle">
     <button class="view-btn active" id="btnExt" onclick="setView('exterior')">Exterior</button>
     <button class="view-btn" id="btnInt" onclick="setView('interior')">Interior</button>
+  </div>
+
+  <div class="package-toggle">
+    <div class="package-label">Trim</div>
+    <button class="package-btn active" id="btnCarbon" onclick="setTrimPackage('carbon')">Carbon</button>
+    <button class="package-btn" id="btnBlackOptics" onclick="setTrimPackage('black')">Black Optics</button>
   </div>
 
   <!-- drag hint -->
@@ -246,12 +275,42 @@ const COLORS = [
 ];
 
 let bodyMaterials = [];
+let chromeMaterials = [];
+let blackoutMaterials = [];
+let carbonMaterials = [];
+let trimPackage = 'carbon';
 let currentColor = COLORS[0].val;
 
 // build swatches
 const swatchWrap = document.getElementById('swatches');
 const colorNameEl = document.getElementById('colorName');
 let rareInserted = false;
+
+function applyTrimPackage() {
+  const isBlack = trimPackage === 'black';
+  chromeMaterials.forEach(mat => {
+    mat.color.setHex(isBlack ? 0x050506 : 0xd8d8d2);
+    mat.metalness = isBlack ? 0.45 : 1;
+    mat.roughness = isBlack ? 0.32 : 0.12;
+  });
+  blackoutMaterials.forEach(mat => {
+    mat.color.setHex(0x050506);
+    mat.metalness = 0.32;
+    mat.roughness = 0.34;
+  });
+  carbonMaterials.forEach(mat => {
+    mat.color.setHex(isBlack ? 0x050506 : 0x090a0b);
+    mat.metalness = 0.18;
+    mat.roughness = isBlack ? 0.28 : 0.22;
+  });
+}
+
+function setTrimPackage(pkg) {
+  trimPackage = pkg;
+  document.getElementById('btnCarbon').classList.toggle('active', pkg === 'carbon');
+  document.getElementById('btnBlackOptics').classList.toggle('active', pkg === 'black');
+  applyTrimPackage();
+}
 
 COLORS.forEach((c, i) => {
   if (c.rare && !rareInserted) {
@@ -320,8 +379,94 @@ scene.add(carGroup);
 
 // ── LOAD MODEL ──
 // The RS6 GT has clear material names — target them precisely
-const BODY_MATERIALS = ['body_0', 'body']; // Kit1_Paint_Geo uses 'body_0'
-const EXCLUDE = ['badge','logo','glass','window','windshield','lens','light','lamp','rubber','tire','tyre','rim','brake','caliper','wiper','antenna','plate','grille','carbon','int_'];
+const BODY_MATERIALS = ['body_0', 'body'];
+const PRESERVE_HINTS = ['badge','logo','emblem','rings','glass','window','windshield','lens','light','lamp','rubber','tire','tyre','rim','wheel','brake','caliper','wiper','antenna','plate','grille','grill','carbon','int_','interior','sensor','radar','camera','parking','pdc','reflector','trim','black','exhaust','diffuser','splitter','mirror'];
+const CHROME_HINTS = ['badge','logo','emblem','rings','chrome','silver','exhaust','metal'];
+const BLACKOUT_HINTS = ['grille','grill','trim','black','rubber','seal','wiper','antenna','intake','sensor','radar','camera','parking','pdc'];
+const CARBON_HINTS = ['carbon','diffuser','splitter','spoiler','mirror','skirt','aero'];
+const GLASS_HINTS = ['glass','window','windshield'];
+const LIGHT_HINTS = ['light','lamp','lens','reflector'];
+const WHEEL_HINTS = ['wheel','rim','tire','tyre','brake','caliper'];
+
+function materialText(mesh, mat) {
+  const meshName = (mesh.name || '').toLowerCase();
+  const matName = (mat?.name || '').toLowerCase();
+  const texName = (mat?.map?.name || mat?.map?.image?.currentSrc || mat?.map?.image?.src || '').toLowerCase();
+  return `${meshName} ${matName} ${texName}`;
+}
+
+function cloneOnce(map, mat, setup) {
+  if (!map.has(mat.uuid)) {
+    const cloned = mat.clone();
+    setup(cloned);
+    map.set(mat.uuid, cloned);
+  }
+  return map.get(mat.uuid);
+}
+
+function getPreservedMaterial(mesh, mat, cache) {
+  const haystack = materialText(mesh, mat);
+
+  if (GLASS_HINTS.some(k => haystack.includes(k))) {
+    return cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(0x0b1118);
+      cloned.metalness = 0.02;
+      cloned.roughness = 0.04;
+      cloned.transparent = true;
+      cloned.opacity = 0.38;
+    });
+  }
+
+  if (LIGHT_HINTS.some(k => haystack.includes(k))) {
+    return cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(0xf4f5ef);
+      cloned.metalness = 0.02;
+      cloned.roughness = 0.08;
+      cloned.transparent = true;
+      cloned.opacity = 0.72;
+    });
+  }
+
+  if (CARBON_HINTS.some(k => haystack.includes(k))) {
+    const carbon = cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(0x090a0b);
+      cloned.metalness = 0.18;
+      cloned.roughness = 0.22;
+    });
+    if (!carbonMaterials.includes(carbon)) carbonMaterials.push(carbon);
+    return carbon;
+  }
+
+  if (CHROME_HINTS.some(k => haystack.includes(k))) {
+    const chrome = cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(trimPackage === 'black' ? 0x050506 : 0xd8d8d2);
+      cloned.metalness = trimPackage === 'black' ? 0.45 : 1;
+      cloned.roughness = trimPackage === 'black' ? 0.32 : 0.12;
+    });
+    if (!chromeMaterials.includes(chrome)) chromeMaterials.push(chrome);
+    return chrome;
+  }
+
+  if (BLACKOUT_HINTS.some(k => haystack.includes(k))) {
+    const blackout = cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(0x050506);
+      cloned.metalness = 0.32;
+      cloned.roughness = 0.34;
+    });
+    if (!blackoutMaterials.includes(blackout)) blackoutMaterials.push(blackout);
+    return blackout;
+  }
+
+  if (WHEEL_HINTS.some(k => haystack.includes(k))) {
+    return cloneOnce(cache, mat, cloned => {
+      cloned.color.setHex(haystack.includes('caliper') ? 0xcc1024 : 0x15171a);
+      cloned.metalness = haystack.includes('tire') || haystack.includes('tyre') ? 0.05 : 0.78;
+      cloned.roughness = haystack.includes('tire') || haystack.includes('tyre') ? 0.62 : 0.25;
+    });
+  }
+
+  return null;
+}
 
 const loader = new THREE.GLTFLoader();
 loader.load('audi_rs6gt_avant.glb', gltf => {
@@ -334,8 +479,8 @@ loader.load('audi_rs6gt_avant.glb', gltf => {
   model.scale.setScalar(scale);
   model.position.set(-center.x*scale, -box.min.y*scale, -center.z*scale);
 
-  // First pass: collect all unique materials named 'body'
   const seenMats = new Map();
+  const preservedMats = new Map();
   model.traverse(child => {
     if (!child.isMesh) return;
     child.castShadow = true;
@@ -344,10 +489,17 @@ loader.load('audi_rs6gt_avant.glb', gltf => {
     const mats = Array.isArray(child.material) ? child.material : [child.material];
     mats.forEach((mat, idx) => {
       if (!mat) return;
-      const matName = (mat.name || '').toLowerCase();
+      const preserved = getPreservedMaterial(child, mat, preservedMats);
+      if (preserved) {
+        if (Array.isArray(child.material)) child.material[idx] = preserved;
+        else child.material = preserved;
+        return;
+      }
 
-      // target ONLY material named exactly 'body'
-      if (matName === 'body') {
+      const matName = (mat.name || '').toLowerCase();
+      const haystack = materialText(child, mat);
+
+      if (BODY_MATERIALS.includes(matName) && !PRESERVE_HINTS.some(k => haystack.includes(k))) {
         if (!seenMats.has(mat.uuid)) {
           const cloned = mat.clone();
           cloned.metalness = 0.35;
@@ -355,7 +507,6 @@ loader.load('audi_rs6gt_avant.glb', gltf => {
           bodyMaterials.push(cloned);
           seenMats.set(mat.uuid, cloned);
         }
-        // replace material on mesh with our cloned version
         if (Array.isArray(child.material)) {
           child.material[idx] = seenMats.get(mat.uuid);
         } else {
@@ -368,6 +519,7 @@ loader.load('audi_rs6gt_avant.glb', gltf => {
 
   // apply default color
   bodyMaterials.forEach(m => m.color.setHex(currentColor));
+  applyTrimPackage();
   carGroup.add(model);
 
   const loaderEl = document.getElementById('loader');

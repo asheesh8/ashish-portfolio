@@ -8,6 +8,7 @@ const TAGS = ['Three.js', 'WebGL', '3D', 'JavaScript', 'Portfolio'];
 const CARS = {
   gt3rs: { label: '911 GT3 RS', file: 'gt3rs-configurator.html' },
   rs6:   { label: 'RS6 GT',     file: 'rs6gt-configurator.html' },
+  c220:  { label: 'C220',       file: 'c220-configurator.html' },
 };
 
 export default function BlogPostCar() {
@@ -124,18 +125,33 @@ export default function BlogPostCar() {
 
           <h2>What it is</h2>
           <p>
-            An interactive 3D viewer for the Porsche 911 GT3 RS (992 generation). Drag to rotate
-            the car 360°. Pick from 14 paint colors and the body repaints in real time. Click
-            "Interior" and the camera lerps into the driver's seat — drag to look around the cabin.
+            Three cars, one configurator. Use the switcher at the top of the widget to toggle between them.
           </p>
-          <p>The 14 colors break down into two groups:</p>
+          <p>
+            <strong>Porsche 911 GT3 RS (992)</strong> — drag to rotate 360°, pick from 14 paint
+            colors, click Interior and the camera lerps into the driver's seat.
+          </p>
+          <p>GT3 RS colors:</p>
           <ul>
             <li><strong>Standard (6):</strong> Lava Orange, Guards Red, Racing Yellow, Chalk, GT Silver, Jet Black</li>
             <li><strong>Paint to Sample (8):</strong> Lizard Green, Python Green, Frozen Blue, Riviera Blue, Ultraviolet, Indian Red, Pastel Yellow, Rubystar</li>
           </ul>
           <p>
-            Auto-spins when you're not touching it. Pauses when you grab it. Scroll to zoom in
-            and out.
+            <strong>Audi RS6 GT Avant (2024)</strong> — same interaction model, 12 colors, interior
+            view into the cabin.
+          </p>
+          <p>RS6 GT colors:</p>
+          <ul>
+            <li><strong>Standard (6):</strong> Daytona Gray, Sebring Black, Glacier White, Catalunya Red, Navarra Blue, Floret Silver</li>
+            <li><strong>Rare (6):</strong> Nardo Gray, Goodwood Green, Kemora Gray, Merlin Purple, Vegas Yellow, Sonoma Green</li>
+          </ul>
+          <p>
+            All three auto-spin when idle, pause on grab, scroll to zoom.
+          </p>
+          <p>
+            <strong>Mercedes-Benz C220 W206</strong> is in the garage now too. It uses the same
+            rotate, repaint, zoom, and interior-view interaction model, but with a cleaner executive
+            sedan palette.
           </p>
 
           <h2>Why I built it</h2>
@@ -149,6 +165,12 @@ export default function BlogPostCar() {
             time into getting it right. The GT3 RS specifically. Flat-six screaming to 9000rpm, rear
             wing that fills the entire back of the car, no turbos, just a track car that happens to
             be road legal. If you've seen one in person you understand.
+          </p>
+          <p>
+            The RS6 GT is the other dream. V8 biturbo, wagon body, full carbon aero kit, one of
+            only 660 ever made. Completely different energy from the GT3 RS — one is a track weapon,
+            the other is a continent-crusher that happens to have a race-spec V8. Deserved its own
+            configurator.
           </p>
 
           <h2>How it works</h2>
@@ -290,14 +312,15 @@ camera.lookAt(interiorLookAt);`}</code></pre>
 
           <h2>What's next</h2>
           <p>
-            I want to add the Audi RS6 GT as a second car — same configurator, garage switcher UI
-            to toggle between them. The RS6 GT is my dream daily driver: V8 biturbo, manual
-            gearbox, full carbon aero, wagon body. It deserves its own configurator.
+            The RS6 GT is already in — it's live in the configurator now with its own color palette
+            and interior view. One thing that was different building it: the RS6 GT model had a
+            material explicitly named <code>"body"</code>, so instead of keyword matching I could
+            just target it by exact name. Cleaner and more precise than the GT3 RS approach.
           </p>
           <p>
-            Possibly swap the transparent background for a proper garage scene — rough concrete
-            floor, ambient lighting rig. Make it feel like you're standing in a showroom instead of
-            floating in the portfolio gradient.
+            What's actually next: probably a proper garage scene — rough concrete floor, showroom
+            lighting rig, something that makes it feel like you're standing in a space rather than
+            floating in the portfolio gradient. Maybe a fourth car.
           </p>
         </div>
 
