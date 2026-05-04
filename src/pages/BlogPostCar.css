@@ -156,6 +156,43 @@
   background: rgba(6, 12, 8, 0.96);
 }
 
+/* Car switcher tabs */
+.demo-switcher {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px 6px;
+}
+
+.demo-switcher-modal {
+  padding: 10px 14px 6px;
+  border-bottom: none;
+}
+
+.demo-switcher-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.demo-switcher-btn.active {
+  background: var(--accent);
+  color: #060c08;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.demo-switcher-btn:not(.active):hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
 /* Terminal bar — kept exactly as before */
 .demo-widget-bar {
   display: flex;
@@ -223,7 +260,8 @@
 /* Preview card — clickable, no iframe */
 .demo-widget-preview {
   width: 100%;
-  min-height: 200px;
+  aspect-ratio: 16 / 9;
+  max-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,7 +270,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 40px 24px;
+  padding: 0;
   transition: background var(--transition);
 }
 .demo-widget-preview:hover {
@@ -268,17 +306,24 @@
 .demo-modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.88);
-  display: flex;
-  align-items: stretch;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .demo-modal {
-  flex: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 85vh;
+  max-width: 1100px;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 9999;
+  background: #060c08;
   display: flex;
   flex-direction: column;
-  background: #060c08;
 }
 
 /* Post bottom nav */
@@ -303,9 +348,17 @@
   color: var(--accent);
 }
 
+@media (max-width: 768px) {
+  .demo-modal {
+    width: 96vw;
+    height: 75vh;
+  }
+  .demo-modal .demo-widget-title { font-size: 0.65rem; }
+  .demo-modal .demo-widget-close { font-size: 0.75rem; }
+}
+
 @media (max-width: 560px) {
   .post-wrapper { padding: 60px 20px 80px; }
   .post-title { margin-bottom: 36px; }
   .code-block { padding: 16px; font-size: 0.77rem; }
-  .demo-widget-preview { min-height: 160px; padding: 32px 20px; }
 }

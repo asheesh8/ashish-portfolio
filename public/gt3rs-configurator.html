@@ -433,8 +433,8 @@ canvas.addEventListener('mousemove', e => {
       // in interior: drag = look around from driver seat
       targetIntLookH += (e.clientX - prevX) * 0.004;
       targetIntLookV -= (e.clientY - prevY) * 0.003;
-      targetIntLookH = Math.max(-1.2, Math.min(1.2, targetIntLookH));
-      targetIntLookV = Math.max(-0.4, Math.min(0.5, targetIntLookV));
+      targetIntLookH = Math.max(-2.5, Math.min(2.5, targetIntLookH));
+      targetIntLookV = Math.max(-0.8, Math.min(0.8, targetIntLookV));
     } else {
       targetRotY += (e.clientX - prevX) * 0.007;
       targetRotX += (e.clientY - prevY) * 0.003;
@@ -471,8 +471,8 @@ canvas.addEventListener('touchmove', e => {
     if (currentView === 'interior') {
       targetIntLookH += (t.clientX - prevX) * 0.004;
       targetIntLookV -= (t.clientY - prevY) * 0.003;
-      targetIntLookH = Math.max(-1.2, Math.min(1.2, targetIntLookH));
-      targetIntLookV = Math.max(-0.4, Math.min(0.5, targetIntLookV));
+      targetIntLookH = Math.max(-2.5, Math.min(2.5, targetIntLookH));
+      targetIntLookV = Math.max(-0.8, Math.min(0.8, targetIntLookV));
     } else {
       targetRotY += (t.clientX - prevX) * 0.007;
       targetRotX += (t.clientY - prevY) * 0.003;
@@ -507,7 +507,7 @@ let currentView = 'exterior';
 // exterior cam defaults
 const EXT_CAM = { x: 0, y: 1.4, z: 5.5, lx: 0, ly: 0.6, lz: 0 };
 // interior — driver seat POV looking at dash/steering
-const INT_CAM = { x: -0.35, y: 1.05, z: 0.6, lx: 0.2, ly: 0.85, lz: -1.5 };
+const INT_CAM = { x: 0.0, y: 1.1, z: 1.0, lx: 0.0, ly: 0.8, lz: -2.0 };
 
 let camTarget = { ...EXT_CAM };
 let camCurrent = { x: EXT_CAM.x, y: EXT_CAM.y, z: EXT_CAM.z, lx: EXT_CAM.lx, ly: EXT_CAM.ly, lz: EXT_CAM.lz };
@@ -563,8 +563,10 @@ const clock = new THREE.Clock();
   rotX += (targetRotX - rotX) * 0.07;
   panX += (targetPanX - panX) * 0.07;
   panY += (targetPanY - panY) * 0.07;
-  carGroup.rotation.y = rotY;
-  carGroup.rotation.x = rotX;
+  if (currentView === 'exterior') {
+    carGroup.rotation.y = rotY;
+    carGroup.rotation.x = rotX;
+  }
   carGroup.position.x = panX;
   carGroup.position.y = panY;
   // smooth camera lerp (handles both zoom and interior transition)
@@ -578,7 +580,7 @@ const clock = new THREE.Clock();
     intLookH += (targetIntLookH - intLookH) * 0.08;
     intLookV += (targetIntLookV - intLookV) * 0.08;
     // look direction from driver seat: base looks at dash, drag shifts it
-    const lookX = INT_CAM.lx + intLookH * 1.5;
+    const lookX = INT_CAM.lx + intLookH * 2.5;
     const lookY = INT_CAM.ly + intLookV;
     const lookZ = INT_CAM.lz;
     camera.lookAt(lookX, lookY, lookZ);
