@@ -10,7 +10,7 @@ export default function Hero() {
         </p>
 
         <h1 className="hero-title reveal reveal-delay-1">
-          I'm <span className="hero-name">Ashish.</span><br />
+          I'm <span className="hero-name">Ashish<a href="/admin" className="hero-admin-i" title="Admin">.</a></span><br />
           <span className="hero-gradient-text">I build things that work.</span>
         </h1>
 

@@ -1,10 +1,29 @@
+import { useState, useEffect } from 'react';
 import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
-import { posts } from '../data/posts';
+import { posts as staticPosts } from '../data/posts';
+import { getPublishedPosts, formatDateDisplay } from '../utils/postStorage';
 import './LatestPosts.css';
+
+function mergedPosts() {
+  const dynamic = getPublishedPosts().map(p => ({
+    slug: p.slug,
+    title: p.title,
+    date: formatDateDisplay(p.date),
+    description: p.description,
+    tags: Array.isArray(p.tags) ? p.tags : (p.tags || '').split(',').map(t => t.trim()).filter(Boolean),
+    draft: false,
+  }));
+  const staticSlugs = new Set(staticPosts.map(p => p.slug));
+  const uniqueDynamic = dynamic.filter(p => !staticSlugs.has(p.slug));
+  return [...uniqueDynamic, ...staticPosts];
+}
 
 export default function LatestPosts() {
   const ref = useReveal(0.1);
+  const [posts, setPosts] = useState(() => mergedPosts());
+
+  useEffect(() => { setPosts(mergedPosts()); }, []);
 
   const handlePostClick = (e, slug) => {
     e.preventDefault();

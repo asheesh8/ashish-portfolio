@@ -377,6 +377,7 @@ camera.lookAt(interiorLookAt);`}</code></pre>
             </button>
           </div>
           <iframe
+            key={car}
             src={`/${CARS[car].file}`}
             style={{ width: '100%', flex: 1, minHeight: 0, border: 'none', display: 'block', opacity: iframeLoaded ? 1 : 0.3, transition: 'opacity 0.2s ease' }}
             onLoad={() => setIframeLoaded(true)}

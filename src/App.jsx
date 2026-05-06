@@ -13,7 +13,11 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BlogPage from './pages/BlogPage';
 import BlogPostCar from './pages/BlogPostCar';
+import BlogPostDynamic from './pages/BlogPostDynamic';
+import AdminPage from './pages/AdminPage';
 import './App.css';
+
+const STATIC_SLUGS = new Set(['3d-car-configurator']);
 
 function HomePage() {
   useEffect(() => {
@@ -41,15 +45,19 @@ function HomePage() {
 
 function App() {
   const path = useRoute();
+  const blogSlug = path.startsWith('/blog/') ? path.slice(6) : null;
+
+  if (path === '/admin') return <AdminPage />;
 
   return (
     <>
       <MountainScene />
       <Navbar />
       <main>
+        {path === '/'    && <HomePage />}
         {path === '/blog' && <BlogPage />}
-        {path === '/blog/3d-car-configurator' && <BlogPostCar />}
-        {path === '/' && <HomePage />}
+        {blogSlug === '3d-car-configurator' && <BlogPostCar />}
+        {blogSlug && !STATIC_SLUGS.has(blogSlug) && <BlogPostDynamic slug={blogSlug} />}
       </main>
       <Footer />
     </>
