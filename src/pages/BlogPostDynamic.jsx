@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
 import { getPost } from '../utils/postStorage';
 import { parseBlocks, renderBlocks } from '../utils/parsePost';
 import './BlogPostCar.css';
 
 export default function BlogPostDynamic({ slug }) {
+  const ref = useReveal(0.05);
   const [post, setPost] = useState(null);
   const [notFound, setNotFound] = useState(false);
 
@@ -32,7 +34,7 @@ export default function BlogPostDynamic({ slug }) {
   const tags = Array.isArray(post.tags) ? post.tags : (post.tags || '').split(',').map(t => t.trim()).filter(Boolean);
 
   return (
-    <article id="blog-post-car">
+    <article id="blog-post-car" ref={ref}>
       <div className="post-wrapper">
         <a href="/blog" className="post-back reveal" onClick={handleBack}>← blog</a>
 
