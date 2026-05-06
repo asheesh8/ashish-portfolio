@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
 import { getPost } from '../utils/postStorage';
 import { parseBlocks, renderBlocks } from '../utils/parsePost';
 import './BlogPostCar.css';
 
 export default function BlogPostDynamic({ slug }) {
-  const ref = useReveal(0.05);
   const [post, setPost] = useState(null);
   const [notFound, setNotFound] = useState(false);
 
@@ -34,21 +32,21 @@ export default function BlogPostDynamic({ slug }) {
   const tags = Array.isArray(post.tags) ? post.tags : (post.tags || '').split(',').map(t => t.trim()).filter(Boolean);
 
   return (
-    <article id="blog-post-car" ref={ref}>
+    <article id="blog-post-car">
       <div className="post-wrapper">
-        <a href="/blog" className="post-back reveal" onClick={handleBack}>← blog</a>
+        <a href="/blog" className="post-back" onClick={handleBack}>← blog</a>
 
         <header className="post-header">
-          <div className="post-meta reveal reveal-delay-1">
+          <div className="post-meta">
             <time className="post-date">{post.date}</time>
             <div className="post-tags">
               {tags.map(t => <span key={t} className="post-tag">{t}</span>)}
             </div>
           </div>
-          <h1 className="post-title reveal reveal-delay-2">{post.title}</h1>
+          <h1 className="post-title">{post.title}</h1>
         </header>
 
-        <div className="post-body reveal reveal-delay-3">
+        <div className="post-body">
           {renderBlocks(blocks)}
         </div>
 
