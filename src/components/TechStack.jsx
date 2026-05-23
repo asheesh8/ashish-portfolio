@@ -5,22 +5,22 @@ const STACK_COLS = [
   {
     label: 'Frontend',
     icon: '⬡',
-    tools: ['React', 'Vite', 'HTML / CSS', 'Tailwind'],
+    tools: ['React', 'Vite', 'JavaScript', 'HTML / CSS', 'Tailwind', 'Three.js', 'WebGL', 'Responsive UI'],
   },
   {
     label: 'Backend',
     icon: '⬡',
-    tools: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Supabase'],
+    tools: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Supabase', 'REST APIs', 'Auth', 'Serverless Functions'],
   },
   {
     label: 'Hardware',
     icon: '⬡',
-    tools: ['Arduino', 'C++', 'AVR Assembly', 'Elegoo UNO R3'],
+    tools: ['Arduino', 'C++', 'AVR Assembly', 'Elegoo UNO R3', 'Bluetooth modules', 'Sensors', 'Custom PC builds'],
   },
   {
     label: 'AI & Automation',
     icon: '⬡',
-    tools: ['Anthropic API', 'LLM agents', 'Custom tools', 'Workflow automation'],
+    tools: ['Anthropic API', 'Codex', 'Gemini', 'LLM agents', 'Custom tools', 'Workflow automation'],
   },
 ];
 

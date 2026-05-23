@@ -12,7 +12,7 @@ const ME_IMAGES      = toUrls(meRaw);
 const VERMONT_IMAGES = toUrls(vermontRaw);
 const A4_IMAGES      = toUrls(a4Raw);
 
-const TAGS = ['Goldhaap, NP', 'Burlington, VT', 'Champlain CS', 'NQ Futures', 'Actually ships', 'Still figuring it out'];
+const TAGS = ['🇳🇵 Goldhaap, NP', '🍁 Burlington, VT', '🎓 Champlain CS', '📈 NQ Futures', '🏎️ Actually ships', '🍹 Almost 21'];
 
 export default function About() {
   const ref = useReveal();
@@ -37,14 +37,18 @@ export default function About() {
         <div className="about-columns">
           <p className="reveal reveal-delay-2">
             <span className="about-dropcap">I</span>
-            grew up in Goldhaap, Nepal. Small village, real work, no fantasy version
-            of life. My parents gave up a lot so I could get a shot somewhere else.
-            I think about that every day. That's why I take the work seriously.
+            grew up in a small camp in Goldhaap, Nepal. The first place I remember
+            living burned down completely, and my family had to rebuild our life from
+            nothing. I came to the U.S. when I was 5. My parents gave up a lot so I
+            could get a shot somewhere else. I think about that every day. That's why
+            I take the work seriously.
           </p>
           <p className="reveal reveal-delay-3">
-            Now I'm at Champlain for CS, working at Best Buy, trading NQ when I can,
-            and building apps for people who need the thing done. Not fake startup
-            theater. Not another landing page. Real tools, real users, real problems.
+            Now I'm at Champlain for CS, working at Best Buy, trading NQ futures
+            through firms profitably, and building apps and tools for people who need
+            things done. Not fake startups, not another landing page, not another
+            feature for businesses that never gets used. Actual tools where the results
+            prove why the tool needed to exist.
           </p>
           <p className="reveal reveal-delay-4">
             If you work with me, you get me. No agency chain, no random handoff,
@@ -58,7 +62,7 @@ export default function About() {
         {/* Tags strip */}
         <div className="about-tags reveal reveal-delay-5">
           {TAGS.map((t, i) => (
-            <span key={t} className="about-tag" style={{ borderRight: i < TAGS.length - 1 ? '1px solid var(--hairline)' : 'none' }}>
+            <span key={t} className="about-tag">
               {t}
             </span>
           ))}

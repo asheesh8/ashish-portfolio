@@ -8,7 +8,6 @@ const TAGS = ['Three.js', 'WebGL', '3D', 'JavaScript', 'Portfolio'];
 const CARS = {
   gt3rs: { label: '911 GT3 RS', file: 'gt3rs-configurator.html' },
   rs6:   { label: 'RS6 GT',     file: 'rs6gt-configurator.html' },
-  c220:  { label: 'C220',       file: 'c220-configurator.html' },
 };
 
 export default function BlogPostCar() {
@@ -125,7 +124,7 @@ export default function BlogPostCar() {
 
           <h2>What it is</h2>
           <p>
-            Three cars, one configurator. Use the switcher at the top of the widget to toggle between them.
+            Two cars, one configurator. Use the switcher at the top of the widget to toggle between them.
           </p>
           <p>
             <strong>Porsche 911 GT3 RS (992)</strong> — drag to rotate 360°, pick from 14 paint
@@ -137,21 +136,11 @@ export default function BlogPostCar() {
             <li><strong>Paint to Sample (8):</strong> Lizard Green, Python Green, Frozen Blue, Riviera Blue, Ultraviolet, Indian Red, Pastel Yellow, Rubystar</li>
           </ul>
           <p>
-            <strong>Audi RS6 GT Avant (2024)</strong> — same interaction model, 12 colors, interior
-            view into the cabin.
-          </p>
-          <p>RS6 GT colors:</p>
-          <ul>
-            <li><strong>Standard (6):</strong> Daytona Gray, Sebring Black, Glacier White, Catalunya Red, Navarra Blue, Floret Silver</li>
-            <li><strong>Rare (6):</strong> Nardo Gray, Goodwood Green, Kemora Gray, Merlin Purple, Vegas Yellow, Sonoma Green</li>
-          </ul>
-          <p>
-            All three auto-spin when idle, pause on grab, scroll to zoom.
+            <strong>Audi RS6 GT Avant (2024)</strong> — same interaction model, interior view into
+            the cabin, and a trim toggle for Carbon or Black Optics.
           </p>
           <p>
-            <strong>Mercedes-Benz C220 W206</strong> is in the garage now too. It uses the same
-            rotate, repaint, zoom, and interior-view interaction model, but with a cleaner executive
-            sedan palette.
+            Both auto-spin when idle, pause on grab, and scroll to zoom.
           </p>
 
           <h2>Why I built it</h2>
@@ -312,10 +301,10 @@ camera.lookAt(interiorLookAt);`}</code></pre>
 
           <h2>What's next</h2>
           <p>
-            The RS6 GT is already in — it's live in the configurator now with its own color palette
-            and interior view. One thing that was different building it: the RS6 GT model had a
-            material explicitly named <code>"body"</code>, so instead of keyword matching I could
-            just target it by exact name. Cleaner and more precise than the GT3 RS approach.
+            The RS6 GT is already in and live in the configurator now with its own interior view and
+            trim package controls. One thing that was different building it: the RS6 GT model had a
+            material explicitly named <code>"body"</code>, so instead of keyword matching I could just
+            target it by exact name. Cleaner and more precise than the GT3 RS approach.
           </p>
           <p>
             What's actually next: probably a proper garage scene — rough concrete floor, showroom
