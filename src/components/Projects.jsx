@@ -2,118 +2,129 @@ import { useReveal } from '../hooks/useReveal';
 import Carousel from './Carousel';
 import './Projects.css';
 
-// ── Drop screenshots into each folder — they load automatically ──────────────
-// HomeSHINE:   src/assets/projects/homeshine/
-// ThePit:      src/assets/projects/thepit/
-// Hardware:    src/assets/projects/hardware/
-
 const toUrls = (mods) => Object.values(mods).map(m => m.default);
 
 const HOMESHINE_IMGS = toUrls(import.meta.glob('../assets/projects/homeshine/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}', { eager: true }));
 const THEPIT_IMGS    = toUrls(import.meta.glob('../assets/projects/thepit/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}',    { eager: true }));
 const HARDWARE_IMGS  = toUrls(import.meta.glob('../assets/projects/hardware/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}',  { eager: true }));
+const BESTBUY_IMGS   = toUrls(import.meta.glob('../assets/projects/bestbuy/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}',   { eager: true }));
 
 const projects = [
   {
+    id: 'homeshine',
     title: 'HomeSHINE™',
-    desc: "A full platform I built for a Vermont exterior cleaning company — from the ground up. Field assessment app with 10 screens, a pricing engine that quotes jobs automatically, a Claude AI chatbot so clients aren't waiting on hold, and a full employee system with role-based access. It's live. It's being used. It replaced their entire paper process.",
-    tags: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Claude AI'],
-    live: null,
-    featured: true,
-    emoji: '🏔️',
-    detail: 'React + Vite + Supabase',
+    status: 'Live',
+    statusType: 'live',
+    tagline: 'A full platform for a Vermont exterior-cleaning company. Built from zero.',
+    body: [
+      'They had paper, scattered notes, and a bunch of manual steps. I turned that into a field assessment app, automatic pricing, employee roles, and a Claude chatbot for client questions.',
+      'It is live. People use it. It replaced the messy process. That is the whole point of building software.',
+    ],
+    stack: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Claude AI'],
     images: HOMESHINE_IMGS,
-    folder: 'projects/homeshine',
   },
   {
+    id: 'thepit',
     title: 'ThePit',
-    desc: "I trade NQ futures. The tools out there are either overpriced or useless. So I built my own. ThePit is a trading community with journals, a public feed, user profiles, and an AI Pit Boss that pulls up your trade history and roasts your decision-making. It's sharp. Traders use it. I use it.",
-    tags: ['React', 'Vite', 'Supabase', 'Anthropic API', 'PostgreSQL'],
-    live: 'https://pittrader.vercel.app',
-    featured: true,
-    emoji: '📈',
-    detail: 'React + Supabase + AI',
+    status: 'pittrader.vercel.app',
+    statusHref: 'https://pittrader.vercel.app',
+    statusType: 'link',
+    tagline: 'A trading community for NQ futures traders. Built because I wanted it myself.',
+    body: [
+      'Most trading tools feel overpriced, boring, or useless. ThePit has journals, a public feed, profiles, and an AI Pit Boss that pulls your trade history and calls out bad decision-making.',
+      'It is sharp, it is useful, and yeah, I use it too.',
+    ],
+    stack: ['React', 'Vite', 'Supabase', 'Anthropic API', 'PostgreSQL'],
     images: THEPIT_IMGS,
-    folder: 'projects/thepit',
   },
   {
-    title: 'Hardware Projects',
-    desc: "When I'm not writing web apps I'm messing with hardware. Built Mura — a tank-bot on treads, programmed from scratch. Also built a custom step controller using a foil pad system — basically a DIY foot pedal for inputs. Elegoo UNO R3, breadboards, a lot of trial and error. No tutorials. Just figured it out.",
-    tags: ['Arduino', 'C++', 'AVR Assembly'],
-    live: null,
-    featured: false,
-    emoji: '⚡',
-    detail: 'Arduino · C++ · AVR Assembly',
+    id: 'bestbuy',
+    title: 'Open Box',
+    status: 'Internal',
+    statusType: 'personal',
+    tagline: 'BestBuy Connect sales tool for turning buried open-box inventory into actual revenue.',
+    body: [
+      'Open-box items are great deals for customers, but on the store side a lot of that inventory gets lost, piled away, or ignored because it is annoying to surface fast. That is missed revenue sitting in the building.',
+      'Open Box uses the Best Buy API to pull that inventory into a cleaner sales flow, so floor staff can find open-box options, explain the deal, and move products that would otherwise sit around. Better for customers, better for revenue.',
+    ],
+    stack: ['Python', 'Anthropic API', 'React', 'Node.js'],
+    images: BESTBUY_IMGS,
+  },
+  {
+    id: 'hardware',
+    title: 'Hardware',
+    status: 'Personal',
+    statusType: 'personal',
+    tagline: 'Mura the tank-bot, a foil-pad controller, and a lot of trial and error.',
+    body: [
+      'When I am not writing web apps, I mess with hardware. Built Mura, a tank-bot on treads, and programmed it from scratch. Also made a custom foil-pad step controller, basically a DIY foot pedal.',
+      'Arduino, breadboards, C++, broken wires, fixing it, breaking it again. Normal stuff.',
+    ],
+    stack: ['Arduino', 'C++', 'AVR Assembly'],
     images: HARDWARE_IMGS,
-    folder: 'projects/hardware',
-    badge: 'Personal Project',
   },
 ];
 
 export default function Projects() {
-  const ref = useReveal(0.1);
+  const ref = useReveal(0.08);
 
   return (
     <section id="projects" ref={ref}>
-      <div className="section-wrapper">
-        <span className="section-label reveal">// my work</span>
-        <h2 className="section-title reveal reveal-delay-1">Projects</h2>
-        <p className="section-subtitle reveal reveal-delay-2">
-          Stuff I actually built. For real people. That's actually being used.
-        </p>
+      <div className="projects-wrapper">
+
+        <div className="projects-header reveal">
+          <span className="projects-eyebrow">// my work</span>
+          <h2 className="projects-headline">
+            Stuff I actually built.<br />
+            <span className="projects-headline-sub">Not theory. Not mockups. Real things.</span>
+          </h2>
+        </div>
 
         <div className="projects-list">
           {projects.map((p, i) => (
-            <div
-              key={p.title}
-              className={`project-card reveal reveal-delay-${i + 1}${p.featured ? ' featured' : ''}`}
-            >
-              {/* Screenshot carousel — drop images into src/assets/{folder}/ */}
-              <Carousel
-                images={p.images}
-                label={p.title}
-                className="project-carousel"
-              />
+            <article key={p.id} className={`project-card reveal reveal-delay-${i + 1}`}>
 
-              <div className="project-bottom">
-                <div className="project-left">
-                  <div className="project-emoji-wrap">
-                    <span className="project-emoji">{p.emoji}</span>
+              {/* Image carousel */}
+              <div className="project-media">
+                <Carousel
+                  images={p.images}
+                  label={p.title}
+                  className="project-carousel"
+                  emptyHint={p.id === 'bestbuy' ? 'drop Open Box screenshots into src/assets/projects/bestbuy/' : undefined}
+                />
+              </div>
+
+              {/* Copy */}
+              <div className="project-copy">
+                <div className="project-top">
+                  <div className={`project-status project-status--${p.statusType}`}>
+                    <span className="project-status-dot" />
+                    {p.statusHref ? (
+                      <a href={p.statusHref} target="_blank" rel="noopener noreferrer">{p.status}</a>
+                    ) : (
+                      <span>{p.status}</span>
+                    )}
                   </div>
-                  <div className="project-body">
-                    <div className="project-header">
-                      <h3 className="project-title">{p.title}</h3>
-                      {p.featured && <span className="badge">Featured</span>}
-                      {p.badge && <span className="badge badge-personal">{p.badge}</span>}
-                      <span className="project-detail-tag">{p.detail}</span>
-                    </div>
-                    <p className="project-desc">{p.desc}</p>
-                    <div className="project-tags">
-                      {p.tags.map((tag) => (
-                        <span key={tag} className="project-tag">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
+                  <h3 className="project-title">{p.title}</h3>
+                  <p className="project-tagline">{p.tagline}</p>
                 </div>
 
-                <div className="project-links">
-                  {p.live ? (
-                    <a
-                      href={p.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link-btn"
-                    >
-                      Live &rarr;
-                    </a>
-                  ) : (
-                    <span className="project-link-private">
-                      {p.badge ? 'Personal' : 'Private'}
-                    </span>
-                  )}
+                <div className="project-body">
+                  {p.body.map((para, j) => (
+                    <p key={j}>{para}</p>
+                  ))}
+                </div>
+
+                <div className="project-footer">
+                  <div className="project-stack">
+                    {p.stack.map((t, k) => (
+                      <span key={k} className="project-stack-tag">{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+
+            </article>
           ))}
         </div>
       </div>

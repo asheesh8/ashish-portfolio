@@ -4,176 +4,247 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 20px 32px;
-  transition: background var(--transition), padding var(--transition), border-bottom var(--transition);
+  background: rgba(236, 226, 200, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, background 0.4s ease;
 }
 
 .navbar.scrolled {
+  border-bottom-color: var(--hairline);
+  background: rgba(236, 226, 200, 0.97);
+}
+
+/* Dark mode navbar */
+.navbar.navbar-dark {
   background: rgba(6, 12, 8, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 32px;
+}
+.navbar.navbar-dark.scrolled {
+  border-bottom-color: rgba(82, 183, 136, 0.2);
+  background: rgba(6, 12, 8, 0.96);
 }
 
 .navbar-inner {
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 var(--gutter);
+  height: 58px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  gap: 18px;
 }
 
+/* Logo */
 .navbar-logo {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  cursor: pointer;
-  position: relative;
-  z-index: 110;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-transform: uppercase;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-.logo-bracket { color: var(--accent); }
+.logo-dot { color: var(--rust); }
 
+/* Nav link list */
 .navbar-links {
-  list-style: none;
   display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+
+.navbar-links button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 8px 12px;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.15s, background 0.15s;
+}
+
+.navbar-links button:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .navbar-links button:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.navbar-links button::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s ease;
+}
+.navbar-links button:hover::after {
+  transform: scaleX(1);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  font-size: 16px !important;
+  padding: 6px 10px !important;
+  letter-spacing: 0 !important;
+  opacity: 0.7;
+  transition: opacity 0.15s, background 0.15s !important;
+}
+.theme-toggle:hover {
+  opacity: 1 !important;
+}
+.theme-toggle::after { display: none !important; }
+
+/* Hire Me button */
+.btn-hire {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  background: var(--ink);
+  color: var(--paper-hi);
+  padding: 8px 18px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 0 var(--rust);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-hire:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0 0 var(--rust);
+}
+
+/* Mobile right cluster */
+.navbar-right-mobile {
+  display: none;
   align-items: center;
   gap: 4px;
 }
 
-.navbar-links li button {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  cursor: pointer;
-  padding: 6px 14px;
-  border-radius: 8px;
-  transition: color var(--transition), background var(--transition);
-  text-transform: lowercase;
-  letter-spacing: 0.03em;
-}
-.navbar-links li button:hover {
-  color: var(--text-primary);
-  background: var(--accent-dim);
-}
-
-.btn-hire {
-  background: var(--accent);
-  color: #060c08;
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 8px;
-  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
-  letter-spacing: 0.03em;
-  margin-left: 8px;
-}
-.btn-hire:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px var(--accent-glow);
-}
-
-/* Hamburger */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
-  position: relative;
-  z-index: 110;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 4px;
 }
 .hamburger span {
   display: block;
-  width: 24px;
+  width: 20px;
   height: 2px;
-  background: var(--text-primary);
-  border-radius: 2px;
-  transition: transform 0.35s ease, opacity 0.35s ease, background 0.35s ease;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.hamburger.open span { background: var(--accent); }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile drawer */
-@media (max-width: 700px) {
-  .hamburger { display: flex; }
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .navbar-right-mobile { display: flex; }
+
+  .navbar-inner { padding: 0 var(--gutter-sm); }
+
+  .navbar-logo {
+    font-size: 15px;
+  }
 
   .navbar-links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(320px, 85vw);
-    background: var(--bg-card);
-    border-left: 1px solid var(--border);
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 40px 32px;
-    z-index: 105;
-    transform: translateX(100%);
-    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Always in DOM but off-screen by default */
     display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 58px;
+    bottom: auto;
+    min-height: calc(100dvh - 58px);
+    height: calc(100dvh - 58px);
+    flex-direction: column;
+    align-items: stretch;
+    background: rgba(236, 226, 200, 0.98);
+    padding: 20px var(--gutter-sm) max(26px, env(safe-area-inset-bottom));
+    gap: 0;
+    border-top: 1px solid var(--hairline);
+    box-shadow: 0 18px 40px rgba(36, 31, 25, 0.16);
+    z-index: 90;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  }
+
+  [data-theme="dark"] .navbar-links {
+    background: rgba(6, 12, 8, 0.98);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
   }
 
   .navbar-links.open {
-    transform: translateX(0);
-  }
-
-  /* Backdrop */
-  .navbar-links::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    right: min(320px, 85vw);
-    background: rgba(6, 12, 8, 0.7);
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 0.38s ease;
-    pointer-events: none;
-  }
-  .navbar-links.open::before {
     opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
   }
 
   .navbar-links li {
     width: 100%;
+    border-bottom: 1px solid var(--hairline);
   }
 
-  .navbar-links li button {
-    font-size: 1.15rem;
-    padding: 12px 0;
+  .navbar-links button {
+    display: block;
     width: 100%;
     text-align: left;
+    padding: 18px 4px;
+    font-size: 13px;
     border-radius: 0;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-secondary);
   }
-  .navbar-links li button:hover {
-    background: none;
-    color: var(--accent);
+
+  /* hide the desktop theme-toggle in the list — it's in mobile cluster */
+  .navbar-theme-item { display: none; }
+
+  .navbar-links li:last-child {
+    border-bottom: none;
   }
 
   .btn-hire {
-    font-size: 1rem;
-    padding: 14px 28px;
-    margin-left: 0;
-    margin-top: 16px;
-    width: 100%;
+    display: block;
+    margin-top: 22px;
     text-align: center;
+    padding: 13px 18px;
   }
 }
 
-@media (max-width: 380px) {
-  .navbar { padding: 16px 20px; }
+@media (max-width: 360px) {
+  .navbar-logo {
+    font-size: 14px;
+  }
+
+  .theme-toggle {
+    padding: 6px 8px !important;
+  }
 }

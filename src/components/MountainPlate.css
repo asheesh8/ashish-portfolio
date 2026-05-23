@@ -1,0 +1,260 @@
+.mountain-plate-wrapper {
+  padding: 0 var(--gutter);
+  margin-bottom: 8px;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Frame holds both layers stacked */
+.mountain-plate-frame {
+  position: relative;
+  border: 1px solid var(--ink);
+  padding: 6px;
+  background: var(--paper-hi);
+  overflow: hidden;
+}
+
+/* SVG layer */
+.mountain-svg-layer {
+  position: relative;
+  z-index: 1;
+}
+
+.mountain-svg-layer svg {
+  width: 100%;
+  display: block;
+}
+
+/* Falling leaves */
+.falling-leaves {
+  position: absolute;
+  inset: 6px;
+  z-index: 8;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-leaf {
+  position: absolute;
+  top: -8%;
+  width: clamp(5px, 0.65vw, 8px);
+  height: clamp(8px, 0.9vw, 12px);
+  border-radius: 80% 0 80% 0;
+  background: var(--rust);
+  box-shadow: 1px 1px 0 rgba(13, 40, 24, 0.38);
+  opacity: 0;
+  transform-origin: 50% 50%;
+  animation-name: leafFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.falling-leaf:nth-child(3n) {
+  background: var(--rust-soft);
+}
+
+.falling-leaf:nth-child(4n) {
+  background: var(--warm);
+}
+
+.falling-leaf--1  { left: 8%;  animation-duration: 8.5s;  animation-delay: -2.8s; --drift: 44px; }
+.falling-leaf--2  { left: 16%; animation-duration: 10.2s; animation-delay: -7.2s; --drift: -36px; }
+.falling-leaf--3  { left: 24%; animation-duration: 9.1s;  animation-delay: -4.3s; --drift: 30px; }
+.falling-leaf--4  { left: 31%; animation-duration: 11.4s; animation-delay: -9.5s; --drift: -48px; }
+.falling-leaf--5  { left: 39%; animation-duration: 8.8s;  animation-delay: -1.4s; --drift: 38px; }
+.falling-leaf--6  { left: 47%; animation-duration: 12.6s; animation-delay: -6.1s; --drift: -28px; }
+.falling-leaf--7  { left: 55%; animation-duration: 9.8s;  animation-delay: -8.4s; --drift: 50px; }
+.falling-leaf--8  { left: 62%; animation-duration: 10.8s; animation-delay: -3.7s; --drift: -42px; }
+.falling-leaf--9  { left: 69%; animation-duration: 8.9s;  animation-delay: -5.2s; --drift: 32px; }
+.falling-leaf--10 { left: 76%; animation-duration: 12.1s; animation-delay: -10.2s; --drift: -52px; }
+.falling-leaf--11 { left: 83%; animation-duration: 9.4s;  animation-delay: -2.1s; --drift: 36px; }
+.falling-leaf--12 { left: 90%; animation-duration: 11.7s; animation-delay: -7.8s; --drift: -34px; }
+.falling-leaf--13 { left: 44%; animation-duration: 13.4s; animation-delay: -11.4s; --drift: 58px; }
+.falling-leaf--14 { left: 58%; animation-duration: 10.6s; animation-delay: -5.8s; --drift: -46px; }
+
+@keyframes leafFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.72;
+  }
+  55% {
+    transform: translate3d(calc(var(--drift) * 0.55), 260px, 0) rotate(190deg);
+  }
+  88% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift), 520px, 0) rotate(360deg);
+  }
+}
+
+/* Clickable lookout chair */
+.mountain-chair-hotspot {
+  position: absolute;
+  left: 34%;
+  top: 53%;
+  width: clamp(28px, 3.5vw, 46px);
+  height: clamp(28px, 3.5vw, 46px);
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mountain-chair-hotspot::after {
+  content: '';
+  position: absolute;
+  top: 4%;
+  right: 10%;
+  width: 28%;
+  height: 28%;
+  z-index: 2;
+  background: var(--paper-hi);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  filter: drop-shadow(0 0 5px rgba(244, 236, 210, 0.85));
+  opacity: 0;
+  animation: chairSpark 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.mountain-chair-hotspot::before {
+  content: none;
+  position: absolute;
+  inset: 8px;
+  background: rgba(244, 236, 210, 0.62);
+  border: 1px solid var(--ink);
+  box-shadow: 2px 2px 0 0 rgba(160, 67, 43, 0.62);
+  opacity: 0.72;
+  transform: rotate(-7deg);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.mountain-chair-hotspot:hover::before,
+.mountain-chair-hotspot:focus-visible::before {
+  transform: none;
+  box-shadow: none;
+}
+
+.mountain-chair-hotspot:hover .mountain-chair,
+.mountain-chair-hotspot:focus-visible .mountain-chair {
+  transform: translateY(-3px);
+  filter: drop-shadow(3px 5px 0 rgba(160, 67, 43, 0.72));
+}
+
+.mountain-chair-hotspot:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+.mountain-chair {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  color: var(--ink);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter:
+    drop-shadow(1px 1px 0 rgba(160, 67, 43, 0.62))
+    drop-shadow(0 0 3px rgba(244, 236, 210, 0.45));
+  transition: transform 0.16s ease, filter 0.16s ease;
+  animation: chairGlow 3.4s ease-in-out infinite;
+}
+
+.mountain-chair-shadow {
+  fill: rgba(13, 40, 24, 0.26);
+  stroke: none;
+}
+
+.mountain-chair-fill {
+  fill: var(--paper-hi);
+  stroke: currentColor;
+}
+
+[data-theme="dark"] .mountain-chair-hotspot::before {
+  background: rgba(6, 12, 8, 0.88);
+  border-color: rgba(82, 183, 136, 0.55);
+  box-shadow: 2px 2px 0 0 rgba(82, 183, 136, 0.4);
+}
+
+[data-theme="dark"] .mountain-chair {
+  color: #52b788;
+}
+
+@keyframes chairGlow {
+  0%, 70%, 100% {
+    filter:
+      drop-shadow(1px 1px 0 rgba(160, 67, 43, 0.62))
+      drop-shadow(0 0 2px rgba(244, 236, 210, 0.2));
+  }
+  82% {
+    filter:
+      drop-shadow(1px 1px 0 rgba(160, 67, 43, 0.72))
+      drop-shadow(0 0 8px rgba(244, 236, 210, 0.85));
+  }
+}
+
+@keyframes chairSpark {
+  0%, 65%, 100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+  }
+  73% {
+    opacity: 1;
+    transform: scale(1) rotate(18deg);
+  }
+  84% {
+    opacity: 0;
+    transform: scale(1.35) rotate(45deg);
+  }
+}
+
+/* Double rule */
+.plate-double-rule {
+  padding: 0 var(--gutter) 12px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .mountain-plate-wrapper { padding: 0 var(--gutter-sm); }
+  .plate-double-rule { padding: 0 var(--gutter-sm) 10px; }
+  .mountain-chair-hotspot {
+    left: 35%;
+    top: 53%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mountain-plate-frame {
+    padding: 4px;
+  }
+
+  .falling-leaves {
+    inset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .falling-leaf,
+  .mountain-chair {
+    animation: none;
+  }
+
+  .falling-leaf {
+    display: none;
+  }
+}

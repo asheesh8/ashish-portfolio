@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Lightbox from './Lightbox';
 import './Carousel.css';
 
-export default function Carousel({ images = [], label, className = '' }) {
+export default function Carousel({ images = [], label, className = '', emptyHint }) {
   const [idx, setIdx]         = useState(0);
   const [paused, setPaused]   = useState(false);
   const [lightbox, setLightbox] = useState(false);
@@ -23,7 +23,9 @@ export default function Carousel({ images = [], label, className = '' }) {
       <div className={`carousel carousel-empty ${className}`}>
         <span className="carousel-empty-icon">📷</span>
         <span className="carousel-empty-label">[ {label} ]</span>
-        <span className="carousel-empty-hint">drop images into src/assets/{label?.toLowerCase().replace(/\s+/g, '-') ?? 'folder'}/</span>
+        <span className="carousel-empty-hint">
+          {emptyHint ?? `drop images into src/assets/${label?.toLowerCase().replace(/\s+/g, '-') ?? 'folder'}/`}
+        </span>
       </div>
     );
   }

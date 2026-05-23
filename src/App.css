@@ -1,36 +1,73 @@
-/* Sections get a dark-glass backdrop so mountains glow through subtly */
-#about,
-#services,
-#clients,
-#projects,
-#blog-preview,
-#stack,
-#contact {
-  background: rgba(6, 12, 8, 0.84);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+/* Paper grain overlay — light mode only */
+.paper-grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  background-size: 300px 300px, 600px 600px;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  animation: paperDrift 120s linear infinite;
+  transition: opacity 0.4s ease;
+}
+
+[data-theme="dark"] .paper-grain-overlay {
+  opacity: 0;
+}
+
+.paper-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 31;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(60,40,20,0.18) 100%);
+  transition: opacity 0.4s ease;
+}
+
+[data-theme="dark"] .paper-vignette {
+  opacity: 0;
+}
+
+@keyframes paperDrift {
+  0%   { background-position: 0px 0px, 0px 0px; }
+  100% { background-position: 20px 0px, 20px 0px; }
+}
+
+/* Sections sit on the paper in light mode, on the mountain in dark mode */
+#hero, #about, #projects, #stack, #contact {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] #about,
+[data-theme="dark"] #projects,
+[data-theme="dark"] #stack,
+[data-theme="dark"] #contact {
+  background: rgba(6, 12, 8, 0.82);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-top: 1px solid rgba(255,255,255,0.04);
-  position: relative;
-  z-index: 1;
-}
-
-/* Blog pages — same backdrop but no top border (they're full pages, not sections in a stack) */
-#blog-page,
-#blog-post-car {
-  background: rgba(6, 12, 8, 0.84);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  position: relative;
-  z-index: 1;
-}
-
-/* Hero is fully transparent — mountains are the background */
-#hero {
-  position: relative;
-  z-index: 1;
 }
 
 footer {
   position: relative;
   z-index: 1;
+}
+
+[data-theme="dark"] footer {
+  background: rgba(6, 12, 8, 0.9);
+}
+
+/* Blog / post pages */
+#blog-page, #blog-post-car {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] #blog-page,
+[data-theme="dark"] #blog-post-car {
+  background: rgba(6, 12, 8, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  min-height: 100vh;
 }

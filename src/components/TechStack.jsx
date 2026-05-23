@@ -1,28 +1,27 @@
 import { useReveal } from '../hooks/useReveal';
 import './TechStack.css';
 
-const categories = [
+const STACK_COLS = [
   {
     label: 'Frontend',
-    items: ['React', 'Vite', 'TypeScript', 'CSS / Sass', 'TailwindCSS'],
+    icon: '⬡',
+    tools: ['React', 'Vite', 'HTML / CSS', 'Tailwind'],
   },
   {
-    label: 'Backend & DB',
-    items: ['Go', 'Node.js', 'Supabase', 'PostgreSQL', 'SQLite'],
+    label: 'Backend',
+    icon: '⬡',
+    tools: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Supabase'],
   },
   {
-    label: 'Languages',
-    items: ['JavaScript', 'Python', 'Rust', 'Go', 'Pine Script'],
+    label: 'Hardware',
+    icon: '⬡',
+    tools: ['Arduino', 'C++', 'AVR Assembly', 'Elegoo UNO R3'],
   },
   {
-    label: 'Tools & Infra',
-    items: ['Git / GitHub', 'Docker', 'Vercel', 'Arduino', 'Figma'],
+    label: 'AI & Automation',
+    icon: '⬡',
+    tools: ['Anthropic API', 'LLM agents', 'Custom tools', 'Workflow automation'],
   },
-];
-
-const marqueeItems = [
-  'React', 'Vite', 'Supabase', 'PostgreSQL', 'Go', 'Rust',
-  'Python', 'Pine Script', 'Arduino', 'Docker', 'Git', 'TypeScript',
 ];
 
 export default function TechStack() {
@@ -30,38 +29,67 @@ export default function TechStack() {
 
   return (
     <section id="stack" ref={ref}>
-      <div className="section-wrapper">
-        <span className="section-label reveal">// toolbox</span>
-        <h2 className="section-title reveal reveal-delay-1">Tech Stack</h2>
-        <p className="section-subtitle reveal reveal-delay-2">
-          From Go microservices to Pine Script trading strategies — I go where the problem takes me.
-        </p>
+      <div className="stack-wrapper">
 
-        <div className="stack-grid">
-          {categories.map((cat, ci) => (
-            <div key={cat.label} className={`stack-category reveal reveal-delay-${ci + 1}`}>
-              <h4 className="stack-cat-label">{cat.label}</h4>
-              <ul className="stack-items">
-                {cat.items.map((item) => (
-                  <li key={item} className="stack-item">
-                    <span className="stack-dot" />
-                    {item}
-                  </li>
+        {/* Header */}
+        <div className="stack-header reveal">
+          <span className="stack-eyebrow">// tools of the trade</span>
+          <h2 className="stack-headline">
+            What I build with.<br />
+            <span className="stack-headline-sub">Whatever gets the job done right.</span>
+          </h2>
+        </div>
+
+        {/* Category boxes */}
+        <div className="stack-grid reveal reveal-delay-1">
+          {STACK_COLS.map((col) => (
+            <div key={col.label} className="stack-box">
+              <div className="stack-box-label">{col.label}</div>
+              <ul className="stack-box-list">
+                {col.tools.map(t => (
+                  <li key={t}>{t}</li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
 
-        <div className="stack-marquee-wrapper reveal reveal-delay-4">
-          <div className="stack-marquee">
-            {[...Array(4)].flatMap((_, ri) =>
-              marqueeItems.map((t) => (
-                <span key={`${ri}-${t}`} className="marquee-item">{t}</span>
-              ))
-            )}
+        {/* AI for business callout */}
+        <div className="stack-ai reveal reveal-delay-2">
+          <div className="stack-ai-left">
+            <div className="stack-ai-eyebrow">AI is useful when it stops being a gimmick</div>
+            <p className="stack-ai-body">
+              I like AI when it actually does work. Not "we added a chatbot" for no reason.
+              I mean tools that save time, pull context, and make people faster.
+              The AI Pit Boss in <strong>ThePit</strong> reads a trader's history and points
+              out the bad habits. <strong>Open Box</strong> uses the Best Buy API to surface
+              open-box inventory that can get buried, then turns it into a cleaner sales flow.
+              Same idea every time: less guessing,
+              more useful answers.
+            </p>
+          </div>
+          <div className="stack-ai-right">
+            <div className="stack-ai-example">
+              <span className="stack-ai-example-tag">ThePit</span>
+              <span className="stack-ai-example-desc">AI Pit Boss — trade journal analysis &amp; roast engine</span>
+            </div>
+            <div className="stack-ai-example">
+              <span className="stack-ai-example-tag">Open Box</span>
+              <span className="stack-ai-example-desc">Best Buy API sales tool — recover value from open-box inventory</span>
+            </div>
+            <div className="stack-ai-example">
+              <span className="stack-ai-example-tag">HomeSHINE</span>
+              <span className="stack-ai-example-desc">Client chatbot — answers quote questions 24/7</span>
+            </div>
           </div>
         </div>
+
+      </div>
+
+      <div style={{ padding: '0 var(--gutter) 16px' }}>
+        <div className="double-rule__top" />
+        <div className="double-rule__gap" />
+        <div className="double-rule__bottom" />
       </div>
     </section>
   );

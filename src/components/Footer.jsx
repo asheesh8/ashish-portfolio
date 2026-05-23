@@ -1,20 +1,19 @@
+import { useTheme } from '../context/ThemeContext';
 import './Footer.css';
 
 export default function Footer() {
+  const { dark } = useTheme();
   return (
     <footer className="footer">
+      {!dark && <div className="print-rule" />}
       <div className="footer-inner">
-        <span className="footer-logo">
-          <span className="logo-bracket">&lt;</span>Ashish<span className="logo-bracket">/&gt;</span>
+        <span className="footer-item">Ashish Subedi</span>
+        <span className="footer-item footer-center">
+          Champlain College &nbsp;·&nbsp; Class of 2027
         </span>
-        <p className="footer-copy">
-          &copy; {new Date().getFullYear()} Ashish Subedi &mdash; Burlington, VT
-        </p>
-        <div className="footer-links">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:ashish@example.com">Email</a>
-        </div>
+        <span className="footer-item footer-right">
+          B.S. Computer Science &amp; Innovation&nbsp;&nbsp;·&nbsp;&nbsp;Mathematics&nbsp;&nbsp;·&nbsp;&nbsp;Cybersecurity
+        </span>
       </div>
     </footer>
   );

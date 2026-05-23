@@ -1,20 +1,18 @@
 .carousel {
   position: relative;
-  border-radius: var(--radius);
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--paper-hi);
+  border: 1px solid var(--ink);
+  padding: 4px;
   user-select: none;
 }
 
-/* Inner track */
 .carousel-inner {
   position: absolute;
-  inset: 0;
+  inset: 4px;
 }
 
-/* Slides — stacked, fade in/out */
 .carousel-slide {
   position: absolute;
   inset: 0;
@@ -29,24 +27,22 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: sepia(0.2) contrast(1.02) saturate(0.85);
 }
 
 /* Label chip */
 .carousel-label {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 10px;
+  left: 10px;
   z-index: 3;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(6, 12, 8, 0.72);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 4px 10px;
-  border-radius: 6px;
-  backdrop-filter: blur(6px);
+  color: var(--paper-hi);
+  background: var(--ink);
+  padding: 3px 8px;
   pointer-events: none;
 }
 
@@ -56,56 +52,79 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(6, 12, 8, 0.68);
-  color: var(--text-primary);
-  font-size: 1.4rem;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--ink);
+  background: var(--paper-hi);
+  color: var(--ink);
+  font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition), border-color var(--transition), opacity var(--transition);
+  transition: background 0.15s, color 0.15s;
   opacity: 0;
-  backdrop-filter: blur(4px);
   padding-bottom: 1px;
 }
 .carousel:hover .carousel-btn {
   opacity: 1;
 }
 .carousel-btn:hover {
-  background: rgba(82, 183, 136, 0.2);
-  border-color: var(--accent-glow);
+  background: var(--ink);
+  color: var(--paper-hi);
 }
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn.prev { left: 8px; }
+.carousel-btn.next { right: 8px; }
 
 /* Dot indicators */
 .carousel-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 5px;
   z-index: 3;
 }
 .carousel-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 5px;
+  height: 5px;
   border: none;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--warm);
+  opacity: 0.4;
   cursor: pointer;
   padding: 0;
-  transition: background var(--transition), transform var(--transition);
+  transition: opacity 0.15s, transform 0.15s;
 }
 .carousel-dot.active {
-  background: var(--accent);
+  background: var(--ink);
+  opacity: 1;
   transform: scale(1.4);
+}
+
+/* Dark mode base */
+[data-theme="dark"] .carousel {
+  background: #0c1410;
+  border-color: rgba(82, 183, 136, 0.25);
+}
+[data-theme="dark"] .carousel-btn {
+  background: rgba(12, 20, 16, 0.9);
+  border-color: rgba(82, 183, 136, 0.3);
+  color: #edf2ee;
+}
+[data-theme="dark"] .carousel-btn:hover {
+  background: rgba(82, 183, 136, 0.18);
+  color: #edf2ee;
+}
+[data-theme="dark"] .carousel-dot { background: #52b788; }
+[data-theme="dark"] .carousel-dot.active { background: #edf2ee; }
+[data-theme="dark"] .carousel-label {
+  background: rgba(82, 183, 136, 0.18);
+  color: #edf2ee;
+}
+[data-theme="dark"] .carousel-slide img {
+  filter: contrast(1.02) saturate(0.82) brightness(0.88);
 }
 
 /* Empty state */
@@ -118,16 +137,16 @@
   border-style: dashed;
   cursor: default;
 }
-.carousel-empty-icon { font-size: 2rem; opacity: 0.25; }
+.carousel-empty-icon { font-size: 2rem; opacity: 0.2; }
 .carousel-empty-label {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  color: var(--warm);
+  letter-spacing: 0.08em;
 }
 .carousel-empty-hint {
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--warm);
   opacity: 0.5;
   text-align: center;
   padding: 0 16px;
