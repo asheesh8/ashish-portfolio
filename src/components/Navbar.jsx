@@ -104,18 +104,7 @@ export default function Navbar() {
         <div className="navbar-inner">
 
           <a className="navbar-logo" href="/" onClick={handleHome}>
-            <svg className="logo-a-svg" viewBox="0 0 100 100" width="22" height="22" aria-hidden="true">
-              <defs>
-                <clipPath id="nav-a-mask">
-                  <path d="M50 4 L4 96 L22 96 L50 30 L78 96 L96 96 Z M50 46 L32 84 L68 84 Z" clip-rule="evenodd"/>
-                </clipPath>
-              </defs>
-              <rect width="100" height="100" rx="20" fill="#D01515"/>
-              <path d="M50 4 L4 96 L22 96 L50 30 L78 96 L96 96 Z M50 46 L32 84 L68 84 Z"
-                    fill="white" fill-rule="evenodd"/>
-              <rect x="0" y="58" width="100" height="14" fill="#F5C518" clip-path="url(#nav-a-mask)"/>
-            </svg>
-            SHISH<span className="logo-dot">.</span>
+            ASHISH<span className="logo-dot">.</span>
           </a>
 
           {/* Desktop links */}
