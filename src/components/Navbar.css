@@ -43,32 +43,11 @@
 }
 .logo-dot { color: var(--cyan); font-size: 1.3rem; line-height: 0; margin-top: 2px; }
 
-.logo-a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #CC1111;
-  color: white;
-  font-weight: 900;
-  width: 1.3em;
-  height: 1.3em;
-  border-radius: 4px;
-  margin-right: 1px;
-  position: relative;
-  overflow: hidden;
-  font-size: 0.9em;
-  line-height: 1;
+.logo-a-svg {
+  display: inline-block;
   vertical-align: middle;
-}
-/* Yellow Alvin stripe across the A */
-.logo-a::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  top: 52%;
-  height: 22%;
-  background: #FFD700;
-  pointer-events: none;
+  margin-right: 2px;
+  flex-shrink: 0;
 }
 
 /* Desktop links */
