@@ -1,7 +1,7 @@
 /* ── Navbar pill ── */
 .navbar {
   position: fixed;
-  top: 16px;
+  top: max(16px, env(safe-area-inset-top) + 8px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
@@ -169,8 +169,8 @@
 
 @media (max-width: 700px) {
   .navbar {
-    top: 10px;
-    width: calc(100% - 24px);
+    top: max(10px, env(safe-area-inset-top) + 6px);
+    width: calc(100% - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));
     border-radius: 16px;
   }
   .navbar-right-mobile { display: flex; }
