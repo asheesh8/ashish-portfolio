@@ -58,38 +58,28 @@ export default function TechStack() {
         <div className="stack-ai reveal reveal-delay-2">
           <div className="stack-ai-left">
             <div className="stack-ai-eyebrow">AI is useful when it stops being a gimmick</div>
+            <h3 className="stack-ai-headline">Built real AI tools.<br />Not chatbot theater.</h3>
             <p className="stack-ai-body">
-              I like AI when it actually does work. Not "we added a chatbot" for no reason.
-              I mean tools that save time, pull context, and make people faster.
-              The AI Pit Boss in <strong>ThePit</strong> reads a trader's history and points
-              out the bad habits. <strong>Open Box</strong> uses the Best Buy API to surface
-              open-box inventory that can get buried, then turns it into a cleaner sales flow.
-              Same idea every time: less guessing,
-              more useful answers.
+              I like AI when it actually does work — tools that save time, pull context, and make
+              people faster. Not "we added a chatbot" for no reason.
             </p>
           </div>
           <div className="stack-ai-right">
-            <div className="stack-ai-example">
-              <span className="stack-ai-example-tag">ThePit</span>
-              <span className="stack-ai-example-desc">AI Pit Boss — trade journal analysis &amp; roast engine</span>
+            <div className="stack-ai-item">
+              <span className="stack-ai-item-icon">📈</span>
+              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>ThePit</strong> — AI Pit Boss reads a trader's full history and points out the bad habits.</span>
             </div>
-            <div className="stack-ai-example">
-              <span className="stack-ai-example-tag">Open Box</span>
-              <span className="stack-ai-example-desc">Best Buy API sales tool — recover value from open-box inventory</span>
+            <div className="stack-ai-item">
+              <span className="stack-ai-item-icon">📦</span>
+              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>Open Box</strong> — Best Buy API sales tool. Surfaces buried inventory into a clean sales flow.</span>
             </div>
-            <div className="stack-ai-example">
-              <span className="stack-ai-example-tag">HomeSHINE</span>
-              <span className="stack-ai-example-desc">Client chatbot — answers quote questions 24/7</span>
+            <div className="stack-ai-item">
+              <span className="stack-ai-item-icon">🏠</span>
+              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>HomeSHINE</strong> — Client chatbot that answers quote questions 24/7.</span>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <div style={{ padding: '0 var(--gutter) 16px' }}>
-        <div className="double-rule__top" />
-        <div className="double-rule__gap" />
-        <div className="double-rule__bottom" />
       </div>
     </section>
   );

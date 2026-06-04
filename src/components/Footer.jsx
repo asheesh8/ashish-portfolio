@@ -1,11 +1,9 @@
-import { useTheme } from '../context/ThemeContext';
+import { navigate } from '../router';
 import './Footer.css';
 
 export default function Footer() {
-  const { dark } = useTheme();
   return (
     <footer className="footer">
-      {!dark && <div className="print-rule" />}
       <div className="footer-inner">
         <span className="footer-item">Ashish Subedi</span>
         <span className="footer-item footer-center">
@@ -14,6 +12,14 @@ export default function Footer() {
         <span className="footer-item footer-right">
           B.S. Computer Science &amp; Innovation&nbsp;&nbsp;·&nbsp;&nbsp;Mathematics&nbsp;&nbsp;·&nbsp;&nbsp;Cybersecurity
         </span>
+      </div>
+      <div className="footer-admin-row">
+        <button
+          className="footer-admin-link"
+          onClick={() => { navigate('/admin'); window.scrollTo(0,0); }}
+        >
+          admin
+        </button>
       </div>
     </footer>
   );

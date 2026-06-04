@@ -1,68 +1,52 @@
 import './Hero.css';
 
-function PrintRule({ thick = false }) {
-  return <div className={`print-rule${thick ? ' print-rule--thick' : ''}`} />;
-}
-
-function DoubleRule() {
-  return (
-    <div>
-      <div className="double-rule__top" />
-      <div className="double-rule__gap" />
-      <div className="double-rule__bottom" />
-    </div>
-  );
-}
-
 export default function Hero() {
   return (
     <section id="hero" className="hero-section">
-
-      {/* Masthead bar */}
-      <div className="masthead-bar reveal">
-        <span className="masthead-loc">🇳🇵 Goldhaap, NP</span>
-        <span className="masthead-title">Full-Stack Developer &amp; Freelancer</span>
-        <span className="masthead-loc">📍 Burlington, VT</span>
-      </div>
-      <div className="hero-rule"><PrintRule /></div>
-
-      {/* Hero content */}
       <div className="hero-inner">
 
-        {/* Eyebrow */}
-        <div className="hero-eyebrow-row reveal reveal-delay-1">
-          <span className="hero-eyebrow-text">Available for freelance</span>
+        <div className="hero-status reveal">
+          <span className="hero-status-dot" />
+          Available for freelance
         </div>
 
-        {/* Two-line off-register wordmark */}
-        <div className="hero-wordmark-wrap reveal reveal-delay-2">
-          <h1 className="hero-wordmark hero-wordmark--shadow" aria-hidden="true">
-            ASHISH<br />SUBEDI
-          </h1>
-          <h1 className="hero-wordmark hero-wordmark--ink">
-            ASHISH<br />SUBEDI<a href="/admin" className="hero-admin-dot" title="Admin" aria-label="Admin">.</a>
-          </h1>
-        </div>
+        <h1 className="hero-name reveal reveal-delay-1">
+          <span className="hero-name-line">ASHISH</span>
+          <span className="hero-name-line hero-name-line--glow">SUBEDI</span>
+        </h1>
 
-        {/* Three-column sub-row */}
-        <div className="hero-sub-row reveal reveal-delay-3">
+        <div className="hero-tagline-row reveal reveal-delay-2">
           <p className="hero-tagline">
             I build full-stack apps —<br />
             the kind people actually use,<br />
             not just stare at in a demo.
           </p>
-          <div className="hero-hairline-divider" />
-          <div className="hero-colophon">
-            <div className="hero-colophon-label">About</div>
-            <div>Champlain College · Class of 2027</div>
-            <div>B.S. Computer Science &amp; Innovation</div>
-            <div>Minors: Mathematics &amp; Cybersecurity</div>
-            <div style={{ marginTop: 10 }}>Goldhaap, Nepal → Burlington, VT</div>
+          <div className="hero-divider-v" />
+          <div className="hero-meta">
+            <div className="hero-meta-item">location <span>Burlington, VT</span></div>
+            <div className="hero-meta-item">origin <span>🇳🇵 Goldhaap, Nepal</span></div>
+            <div className="hero-meta-item">school <span>Champlain College · CS 2027</span></div>
+            <div className="hero-meta-item">focus <span>Full-Stack · AI · Hardware</span></div>
           </div>
         </div>
 
+        <div className="hero-cta reveal reveal-delay-3">
+          <a href="mailto:subediashish31@gmail.com" className="btn-primary">
+            Get in touch →
+          </a>
+          <button
+            className="btn-secondary"
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            See my work
+          </button>
+        </div>
       </div>
 
+      <div className="hero-scroll-hint">
+        <span>scroll</span>
+        <div className="hero-scroll-line" />
+      </div>
     </section>
   );
 }

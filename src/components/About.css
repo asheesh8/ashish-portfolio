@@ -1,103 +1,95 @@
 .about-wrapper {
-  padding: 16px var(--gutter) 40px;
+  padding: 100px var(--gutter) 80px;
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
-/* Chapter header */
-.about-header {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 24px;
-  margin-bottom: 20px;
-  align-items: end;
-}
+.about-header { margin-bottom: 48px; }
 
-.about-chapter {
-  padding-top: 8px;
-}
+.about-chapter { margin-bottom: 16px; }
 
 .about-chapter-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--rust);
-  margin-bottom: 8px;
+  color: var(--cyan);
+  margin-bottom: 4px;
 }
 
 .about-chapter-sub {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--warm);
+  font-size: 1rem;
 }
 
 .about-headline {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(40px, 6vw, 72px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--ink);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--fg);
 }
 
 .about-headline-italic {
-  font-style: italic;
+  color: var(--fg-muted);
   font-weight: 400;
-  color: var(--rust);
 }
 
-/* Newspaper three columns */
+/* Three-column body */
 .about-columns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
-  font-family: var(--font-display);
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  margin-bottom: 16px;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Drop cap */
+.about-columns p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--fg-muted);
+}
+
 .about-dropcap {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 56px;
-  line-height: 0.85;
   float: left;
-  margin-right: 8px;
-  margin-top: 6px;
-  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 0.8;
+  margin: 4px 8px 0 0;
+  color: var(--cyan);
 }
 
 .about-signature {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--rust);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-dim);
 }
 
-/* Tags strip */
+/* Tags */
 .about-tags {
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  padding: 10px 0;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 48px;
 }
 
 .about-tag {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink);
-  padding: 4px 18px;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.2s, color 0.2s;
 }
+.about-tag:hover { border-color: rgba(0,212,255,0.3); color: var(--fg); }
 
-/* Carousel strip */
+/* Carousels */
 .about-carousels-wrap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -107,58 +99,19 @@
 .about-carousel-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .about-carousel-header {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.65rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--rust);
+  color: var(--fg-dim);
 }
 
 @media (max-width: 900px) {
-  .about-header {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .about-columns {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .about-carousels-wrap {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-  }
+  .about-columns { grid-template-columns: 1fr; gap: 20px; }
+  .about-carousels-wrap { grid-template-columns: 1fr; }
+  .about-wrapper { padding: 80px var(--gutter-sm) 60px; }
 }
-
-@media (max-width: 720px) {
-  .about-wrapper { padding: 24px var(--gutter-sm) 32px; }
-
-  .about-headline {
-    font-size: clamp(36px, 12vw, 52px);
-    line-height: 1;
-  }
-
-  .about-tags {
-    gap: 8px 0;
-  }
-
-  .about-tag {
-    flex: 1 1 50%;
-    padding: 4px 10px;
-    font-size: 10px;
-  }
-
-  .about-carousels-wrap {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-}
-
-[data-theme="dark"] .about-dropcap { color: var(--rust); }
-[data-theme="dark"] .about-tags { border-color: var(--hairline); }
-[data-theme="dark"] .about-tag { color: var(--text-secondary); }

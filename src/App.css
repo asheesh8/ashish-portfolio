@@ -1,52 +1,28 @@
-/* Paper grain overlay — light mode only */
-.paper-grain-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 30;
-  background-size: 300px 300px, 600px 600px;
-  mix-blend-mode: multiply;
-  opacity: 0.85;
-  animation: paperDrift 120s linear infinite;
-  transition: opacity 0.4s ease;
-}
-
-[data-theme="dark"] .paper-grain-overlay {
-  opacity: 0;
-}
-
-.paper-vignette {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 31;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(60,40,20,0.18) 100%);
-  transition: opacity 0.4s ease;
-}
-
-[data-theme="dark"] .paper-vignette {
-  opacity: 0;
-}
-
-@keyframes paperDrift {
-  0%   { background-position: 0px 0px, 0px 0px; }
-  100% { background-position: 20px 0px, 20px 0px; }
-}
-
-/* Sections sit on the paper in light mode, on the mountain in dark mode */
 #hero, #about, #projects, #stack, #contact {
   position: relative;
   z-index: 1;
 }
 
+/* Dark: frosted glass over wave canvas */
 [data-theme="dark"] #about,
 [data-theme="dark"] #projects,
 [data-theme="dark"] #stack,
 [data-theme="dark"] #contact {
-  background: rgba(6, 12, 8, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-top: 1px solid rgba(255,255,255,0.04);
+  background: rgba(4, 4, 10, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Light: clean white-ish sections, wave is subtle behind hero only */
+[data-theme="light"] #about,
+[data-theme="light"] #projects,
+[data-theme="light"] #stack,
+[data-theme="light"] #contact {
+  background: rgba(244, 245, 250, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 
 footer {
@@ -55,19 +31,30 @@ footer {
 }
 
 [data-theme="dark"] footer {
-  background: rgba(6, 12, 8, 0.9);
+  background: rgba(4, 4, 10, 0.88);
 }
 
-/* Blog / post pages */
+[data-theme="light"] footer {
+  background: rgba(244, 245, 250, 0.95);
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+
 #blog-page, #blog-post-car {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
 }
 
 [data-theme="dark"] #blog-page,
 [data-theme="dark"] #blog-post-car {
-  background: rgba(6, 12, 8, 0.88);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  min-height: 100vh;
+  background: rgba(4, 4, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] #blog-page,
+[data-theme="light"] #blog-post-car {
+  background: rgba(244, 245, 250, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }

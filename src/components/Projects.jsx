@@ -97,17 +97,16 @@ export default function Projects() {
               {/* Copy */}
               <div className="project-copy">
                 <div className="project-top">
+                  <h3 className="project-title">{p.title}</h3>
                   <div className={`project-status project-status--${p.statusType}`}>
-                    <span className="project-status-dot" />
                     {p.statusHref ? (
                       <a href={p.statusHref} target="_blank" rel="noopener noreferrer">{p.status}</a>
                     ) : (
                       <span>{p.status}</span>
                     )}
                   </div>
-                  <h3 className="project-title">{p.title}</h3>
-                  <p className="project-tagline">{p.tagline}</p>
                 </div>
+                <p className="project-tagline">{p.tagline}</p>
 
                 <div className="project-body">
                   {p.body.map((para, j) => (
