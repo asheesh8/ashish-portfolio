@@ -104,7 +104,7 @@ export default function Navbar() {
         <div className="navbar-inner">
 
           <a className="navbar-logo" href="/" onClick={handleHome}>
-            ASHISH<span className="logo-dot">.</span>
+            <span className="logo-a">A</span>SHISH<span className="logo-dot">.</span>
           </a>
 
           {/* Desktop links */}
