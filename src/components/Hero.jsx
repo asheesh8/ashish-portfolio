@@ -12,7 +12,9 @@ export default function Hero() {
 
         <h1 className="hero-name reveal reveal-delay-1">
           <span className="hero-name-line">ASHISH</span>
-          <span className="hero-name-line hero-name-line--glow">SUBEDI</span>
+          <span className="hero-name-line hero-name-line--glow">
+            SUBEDI<a href="/admin" className="hero-admin-dot" aria-label="Admin">.</a>
+          </span>
         </h1>
 
         <div className="hero-tagline-row reveal reveal-delay-2">
