@@ -5,6 +5,9 @@ import {
 } from '../utils/postStorage';
 import './AdminPage.css';
 
+// Client-side check only: VITE_ values are compiled into the public bundle, and
+// posts are saved to this browser's localStorage, so this gate just hides the
+// editor from casual visitors. Real publishing would need a server and auth.
 const PASS = import.meta.env.VITE_ADMIN_PASSWORD || 'ashish';
 const SESSION_KEY = 'admin_authed';
 
