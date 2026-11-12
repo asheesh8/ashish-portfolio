@@ -1,44 +1,19 @@
-# Ashish Subedi — Portfolio
+# ashish-portfolio
 
-Personal portfolio for Ashish Subedi: about, projects (HomeSHINE, The Pit, Open Box and more), tech stack, services, a blog, and contact.
+Ashish Subedi's portfolio, Vermont edition. One long scroll up a trail from Lake Champlain to Camel's Hump: six painted scenes that stick while their content scrolls over them, then slide under the next one.
 
-**Live:** https://ashish-portfolio-rust.vercel.app
-
-## Tech stack
-
-- Vite 8 + React 19 (JavaScript), one CSS file per component
-- A tiny path router (`src/router.js`) — no React Router
-- Light/dark theme via `src/context/ThemeContext.jsx`
-- Blog: built-in posts in `src/data/posts.js` plus drafts written in the browser-only `/admin` editor (`src/utils/postStorage.js`, `localStorage`)
-- `design-preview/` holds standalone HTML/JSX design explorations; it is not part of the build
-
-## Project layout
-
-```
-src/components/   Page sections (Hero, About, Projects, TechStack, Contact, ...)
-src/pages/        Blog index, individual posts, admin editor
-src/data/         Blog post metadata
-src/assets/       Photos and videos used on the site
-public/sw.js      Service worker
-```
-
-## Local setup
-
-Requires Node 20+.
+## Run it
 
 ```bash
 npm install
 npm run dev
-npm run lint
-npm run build     # output in dist/
 ```
 
-## Environment variables
+## Where things live
 
-| Variable | Purpose |
-|---|---|
-| `VITE_ADMIN_PASSWORD` | Optional password for the `/admin` blog editor. It is compiled into the public bundle, so treat it as a casual lock, not security. |
+- `src/data/content.js` holds every word on the page: client sites, builds, experience, courses, links.
+- `src/data/art.js` holds the painted scenes and the two living loops (hero and contact), generated with Higgsfield.
+- `src/components/Chapter.jsx` is the sticky scene. `Atmosphere.jsx` is the weather drawn over each one (glints, dust, snow, leaves, fireflies).
+- `src/styles.css` has the palette and type notes at the top.
 
-## Deploying
-
-Hosted on Vercel with the stock Vite preset; pushes to `main` deploy to production.
+The art currently loads from Higgsfield's CDN. To ship it with the site, download the files into `public/art/` and point `art.js` at them.
