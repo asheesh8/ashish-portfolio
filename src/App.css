@@ -1,8 +1,0 @@
-main, footer { position: relative; z-index: 1; }
-
-#blog-page, #blog-post-car {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  padding-top: 40px;
-}
