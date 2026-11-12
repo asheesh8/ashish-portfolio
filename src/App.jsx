@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useRoute } from './router';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
-import WaveScene from './components/WaveScene';
 import Hero from './components/Hero';
 import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Coursework from './components/Coursework';
 import TechStack from './components/TechStack';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -32,7 +33,9 @@ function HomePage() {
     <>
       <Hero />
       <About />
+      <Experience />
       <Projects />
+      <Coursework />
       <TechStack />
       <Contact />
     </>
@@ -47,7 +50,6 @@ function AppInner() {
 
   return (
     <>
-      <WaveScene />
       <Navbar />
       <main>
         {path === '/'     && <HomePage />}

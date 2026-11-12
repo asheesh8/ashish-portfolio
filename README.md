@@ -1,6 +1,6 @@
 # Ashish Subedi — Portfolio
 
-Personal portfolio for Ashish Subedi: about, projects (HomeSHINE, The Pit, Open Box and more), tech stack, services, a blog, and contact.
+Personal portfolio for Ashish Subedi: about, experience, projects (HomeSHINE, ThePit, Open Box, ClubCRM and more), full Champlain coursework, toolkit, a blog, and contact.
 
 **Live:** https://ashish-portfolio-rust.vercel.app
 
@@ -8,7 +8,8 @@ Personal portfolio for Ashish Subedi: about, projects (HomeSHINE, The Pit, Open 
 
 - Vite 8 + React 19 (JavaScript), one CSS file per component
 - A tiny path router (`src/router.js`) — no React Router
-- Light/dark theme via `src/context/ThemeContext.jsx`
+- Light/dark theme via `src/context/ThemeContext.jsx`; design tokens live in `src/index.css`
+- Fonts: Geist, Geist Mono and Instrument Serif (Google Fonts)
 - Blog: built-in posts in `src/data/posts.js` plus drafts written in the browser-only `/admin` editor (`src/utils/postStorage.js`, `localStorage`)
 - `design-preview/` holds standalone HTML/JSX design explorations; it is not part of the build
 
@@ -17,8 +18,8 @@ Personal portfolio for Ashish Subedi: about, projects (HomeSHINE, The Pit, Open 
 ```
 src/components/   Page sections (Hero, About, Projects, TechStack, Contact, ...)
 src/pages/        Blog index, individual posts, admin editor
-src/data/         Blog post metadata
-src/assets/       Photos and videos used on the site
+src/data/         Blog post metadata, coursework list, contact links
+src/assets/       Photos used on the site (WebP, max 1800px; convert new photos before adding)
 public/sw.js      Service worker
 ```
 

@@ -1,85 +1,38 @@
 import { useReveal } from '../hooks/useReveal';
 import './TechStack.css';
 
-const STACK_COLS = [
-  {
-    label: 'Frontend',
-    icon: '⬡',
-    tools: ['React', 'Vite', 'JavaScript', 'HTML / CSS', 'Tailwind', 'Three.js', 'WebGL', 'Responsive UI'],
-  },
-  {
-    label: 'Backend',
-    icon: '⬡',
-    tools: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Supabase', 'REST APIs', 'Auth', 'Serverless Functions'],
-  },
-  {
-    label: 'Hardware',
-    icon: '⬡',
-    tools: ['Arduino', 'C++', 'AVR Assembly', 'Elegoo UNO R3', 'Bluetooth modules', 'Sensors', 'Custom PC builds'],
-  },
-  {
-    label: 'AI & Automation',
-    icon: '⬡',
-    tools: ['Anthropic API', 'Codex', 'Gemini', 'LLM agents', 'Custom tools', 'Workflow automation'],
-  },
+const GROUPS = [
+  { label: 'Languages', tools: ['JavaScript', 'Python', 'Go', 'Rust', 'Java', 'C++', 'SQL', 'AVR Assembly'] },
+  { label: 'Frontend',  tools: ['React', 'Vite', 'HTML / CSS', 'Tailwind', 'Three.js', 'WebGL'] },
+  { label: 'Backend & Data', tools: ['Node.js', 'Supabase', 'PostgreSQL', 'MongoDB', 'Redis', 'Neo4j', 'REST APIs', 'Auth / OAuth'] },
+  { label: 'AI & Automation', tools: ['Anthropic API', 'Claude', 'LLM agents', 'Tool use', 'Workflow automation'] },
+  { label: 'Systems & Security', tools: ['Linux / Unix', 'Networking', 'Network security', 'Digital forensics', 'Software testing'] },
+  { label: 'Hardware', tools: ['Arduino', 'Elegoo UNO R3', 'Bluetooth modules', 'Sensors', 'Custom PC builds'] },
 ];
 
 export default function TechStack() {
   const ref = useReveal(0.1);
 
   return (
-    <section id="stack" ref={ref}>
-      <div className="stack-wrapper">
-
-        {/* Header */}
-        <div className="stack-header reveal">
-          <span className="stack-eyebrow">// tools of the trade</span>
-          <h2 className="stack-headline">
-            What I build with.<br />
-            <span className="stack-headline-sub">Whatever gets the job done right.</span>
+    <section id="stack" className="section" ref={ref}>
+      <div className="section-inner">
+        <div className="section-head">
+          <div className="section-index reveal"><b>05</b> / Toolkit</div>
+          <h2 className="section-title reveal reveal-delay-1">
+            What I build with.<br /><em>Whatever gets it done right.</em>
           </h2>
         </div>
 
-        {/* Category boxes */}
-        <div className="stack-grid reveal reveal-delay-1">
-          {STACK_COLS.map((col) => (
-            <div key={col.label} className="stack-box">
-              <div className="stack-box-label">{col.label}</div>
-              <ul className="stack-box-list">
-                {col.tools.map(t => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
+        <div className="stack-grid">
+          {GROUPS.map((g, i) => (
+            <div key={g.label} className={`stack-box reveal reveal-delay-${(i % 3) + 1}`}>
+              <div className="stack-label">{g.label}</div>
+              <div className="stack-tools">
+                {g.tools.map(t => <span key={t}>{t}</span>)}
+              </div>
             </div>
           ))}
         </div>
-
-        {/* AI for business callout */}
-        <div className="stack-ai reveal reveal-delay-2">
-          <div className="stack-ai-left">
-            <div className="stack-ai-eyebrow">AI is useful when it stops being a gimmick</div>
-            <h3 className="stack-ai-headline">Built real AI tools.<br />Not chatbot theater.</h3>
-            <p className="stack-ai-body">
-              I like AI when it actually does work — tools that save time, pull context, and make
-              people faster. Not "we added a chatbot" for no reason.
-            </p>
-          </div>
-          <div className="stack-ai-right">
-            <div className="stack-ai-item">
-              <span className="stack-ai-item-icon">📈</span>
-              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>ThePit</strong> — AI Pit Boss reads a trader's full history and points out the bad habits.</span>
-            </div>
-            <div className="stack-ai-item">
-              <span className="stack-ai-item-icon">📦</span>
-              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>Open Box</strong> — Best Buy API sales tool. Surfaces buried inventory into a clean sales flow.</span>
-            </div>
-            <div className="stack-ai-item">
-              <span className="stack-ai-item-icon">🏠</span>
-              <span className="stack-ai-item-text"><strong style={{color:'var(--fg)'}}>HomeSHINE</strong> — Client chatbot that answers quote questions 24/7.</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
   );

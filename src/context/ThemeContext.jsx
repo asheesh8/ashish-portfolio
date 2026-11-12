@@ -7,13 +7,13 @@ export function ThemeProvider({ children }) {
     try {
       const saved = localStorage.getItem('theme');
       if (saved) return saved === 'dark';
-    } catch {}
+    } catch { /* storage blocked: fall back to default */ }
     return true; // default dark
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch { /* storage blocked */ }
   }, [dark]);
 
   return (

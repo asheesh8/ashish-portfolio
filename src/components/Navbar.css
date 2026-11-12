@@ -8,7 +8,7 @@
   width: calc(100% - 48px);
   max-width: 900px;
   border-radius: 100px;
-  background: rgba(7, 7, 15, 0.55);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.08);
@@ -20,9 +20,9 @@
 }
 
 .navbar.scrolled {
-  background: rgba(7, 7, 15, 0.85);
-  border-color: rgba(0,212,255,0.15);
-  box-shadow: 0 0 40px rgba(0,212,255,0.06), 0 8px 32px rgba(0,0,0,0.4);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border-color: color-mix(in srgb, var(--cyan) 15%, transparent);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--cyan) 6%, transparent), 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .navbar-inner {
@@ -97,8 +97,8 @@
 
 /* Hire Me */
 .btn-hire {
-  background: rgba(0,212,255,0.08);
-  border: 1px solid rgba(0,212,255,0.28);
+  background: color-mix(in srgb, var(--cyan) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cyan) 28%, transparent);
   color: var(--cyan) !important;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -109,7 +109,7 @@
   white-space: nowrap;
   display: inline-block;
 }
-.btn-hire:hover { background: rgba(0,212,255,0.18); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+.btn-hire:hover { background: color-mix(in srgb, var(--cyan) 18%, transparent); box-shadow: 0 0 20px color-mix(in srgb, var(--cyan) 20%, transparent); }
 
 /* Mobile hamburger */
 .navbar-right-mobile {

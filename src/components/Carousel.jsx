@@ -3,7 +3,8 @@ import Lightbox from './Lightbox';
 import './Carousel.css';
 
 export default function Carousel({ images = [], label, className = '', emptyHint }) {
-  const [idx, setIdx]         = useState(0);
+  const [rawIdx, setIdx]      = useState(0);
+  const idx = images.length ? rawIdx % images.length : 0;
   const [paused, setPaused]   = useState(false);
   const [lightbox, setLightbox] = useState(false);
 
@@ -15,8 +16,6 @@ export default function Carousel({ images = [], label, className = '', emptyHint
     const id = setInterval(next, 3000);
     return () => clearInterval(id);
   }, [paused, lightbox, next, images.length]);
-
-  useEffect(() => { setIdx(0); }, [images.length]);
 
   if (images.length === 0) {
     return (

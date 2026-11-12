@@ -3,7 +3,7 @@ import { navigate } from '../router';
 import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 
-const SECTION_LINKS = ['about', 'projects', 'stack', 'contact'];
+const SECTION_LINKS = ['about', 'experience', 'projects', 'courses', 'contact'];
 
 function SunIcon() {
   return (
@@ -63,7 +63,7 @@ export default function Navbar() {
     if (window.location.pathname === '/') {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.href = '/#' + id;
+      window.location.assign('/#' + id);
     }
   };
 

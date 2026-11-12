@@ -1,60 +1,8 @@
-#hero, #about, #projects, #stack, #contact {
-  position: relative;
-  z-index: 1;
-}
-
-/* Dark: frosted glass over wave canvas */
-[data-theme="dark"] #about,
-[data-theme="dark"] #projects,
-[data-theme="dark"] #stack,
-[data-theme="dark"] #contact {
-  background: rgba(4, 4, 10, 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Light: clean white-ish sections, wave is subtle behind hero only */
-[data-theme="light"] #about,
-[data-theme="light"] #projects,
-[data-theme="light"] #stack,
-[data-theme="light"] #contact {
-  background: rgba(244, 245, 250, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(0,0,0,0.06);
-}
-
-footer {
-  position: relative;
-  z-index: 1;
-}
-
-[data-theme="dark"] footer {
-  background: rgba(4, 4, 10, 0.88);
-}
-
-[data-theme="light"] footer {
-  background: rgba(244, 245, 250, 0.95);
-  border-top: 1px solid rgba(0,0,0,0.07);
-}
+main, footer { position: relative; z-index: 1; }
 
 #blog-page, #blog-post-car {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-}
-
-[data-theme="dark"] #blog-page,
-[data-theme="dark"] #blog-post-car {
-  background: rgba(4, 4, 10, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-[data-theme="light"] #blog-page,
-[data-theme="light"] #blog-post-car {
-  background: rgba(244, 245, 250, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding-top: 40px;
 }
