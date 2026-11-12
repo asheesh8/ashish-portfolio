@@ -18,7 +18,7 @@ const ROLES = [
     when: 'Aug 2023 — now',
     title: 'Funded Futures Trader',
     org: 'Topstep',
-    body: 'Trade NQ futures on a $200K funded allocation. Strict risk rules, fast data-driven decisions, and the reason I built ThePit.',
+    body: 'Trade NQ futures on a $200K funded allocation, with $60K+ in funded-account payouts. Strict risk rules, fast data-driven decisions, and the reason I built ThePit.',
   },
   {
     when: 'Apr 2023 — now',
