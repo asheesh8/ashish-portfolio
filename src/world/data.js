@@ -181,7 +181,7 @@ export const LAYERS = [
   { layer: 'dirt', when: 'Aug 2026 – now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College',
     body: 'Team of three. I’m on the front end: designing the UI and wiring it up to the backend my teammates are building.' },
   { layer: 'stone', when: 'Aug 2023 – now', title: 'Funded futures trader', org: 'Topstep',
-    body: 'I trade NQ on a $200K funded allocation, with $60K+ in funded-account payouts. Strict risk rules, fast decisions, no ego. It’s also why ThePit exists.' },
+    body: 'I trade NQ on a $200K funded allocation, with $40K+ in funded-account payouts. Strict risk rules, fast decisions, no ego. It’s also why ThePit exists.' },
   { layer: 'deep', when: 'Apr 2023 – now', title: 'Sales', org: 'Best Buy',
     body: 'Helping people figure out tech without making them feel dumb. Ended up building Open Box for the floor because the open-box workflow was painful.' },
   { layer: 'ore', when: 'Mar – Jun 2023', title: 'Research intern', org: 'Essex Junction Recreation Dept.',

@@ -57,14 +57,18 @@ a { color: inherit; }
 
 /* ── Art layer ─────────────────────────────────────────────── */
 .art { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--plum-900); }
-.art picture, .art picture img { width: 100%; height: 100%; }
-.art picture img {
-  object-fit: cover;
+.art-move {
+  position: absolute; inset: 0;
   transform: scale(1.08);
   transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
   animation: art-in 1.4s cubic-bezier(.2,.7,.2,1) both;
   will-change: transform;
 }
+.art picture, .art picture img, .art-video { position: absolute; inset: 0; width: 100%; height: 100%; }
+.art picture img, .art-video { object-fit: cover; }
+/* the loop fades in over the still once it is actually playing, so there is never a blank frame */
+.art-video { opacity: 0; transition: opacity .9s ease; }
+.art-video.is-ready { opacity: 1; }
 @keyframes art-in { from { opacity: 0; filter: saturate(.6) brightness(.7); } to { opacity: 1; filter: none; } }
 .art-shade { position: absolute; inset: 0; pointer-events: none; }
 .world--island .art-shade {
@@ -226,6 +230,12 @@ kbd {
 }
 .slab-wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
 
+/* Soft fades so scrolling content melts under the fixed mark and hotbar instead of colliding */
+.world::before, .world::after { content: ''; position: fixed; left: 0; right: 0; z-index: 15; pointer-events: none; }
+.world::before { top: 0; height: calc(76px + env(safe-area-inset-top)); background: linear-gradient(180deg, rgba(21,15,36,.85), rgba(21,15,36,0)); }
+.world::after { bottom: 0; height: calc(120px + env(safe-area-inset-bottom)); background: linear-gradient(0deg, rgba(21,15,36,.9) 20%, rgba(21,15,36,0)); }
+.world--island::before, .world--end::before { opacity: .5; }
+
 .h1 {
   margin: 0; font-family: var(--f-display); font-weight: 700; letter-spacing: -0.02em;
   font-variation-settings: 'SOFT' 100, 'opsz' 144;
@@ -289,11 +299,12 @@ kbd {
 
 /* ── Library ───────────────────────────────────────────────── */
 .bookcase {
+  grid-template-columns: minmax(0, 1fr);
   padding: clamp(18px, 3vw, 34px); display: grid; gap: 10px;
   background: linear-gradient(180deg, #5b3b22, #3f2816);
   box-shadow: inset 0 0 0 4px #2b1a0e, inset 8px 8px 0 rgba(255,255,255,.05), 0 30px 80px rgba(0,0,0,.5);
 }
-.shelf { position: relative; padding-top: 34px; }
+.shelf { position: relative; padding-top: 34px; min-width: 0; }
 .shelf-label {
   position: absolute; top: 4px; left: 6px; margin: 0;
   font-family: var(--f-display); font-weight: 600; font-size: 16px; color: #f0d9b5; font-variation-settings: 'SOFT' 100;
@@ -335,6 +346,8 @@ kbd {
   font-variation-settings: 'SOFT' 100;
 }
 
+/* the scene is its own stacking context, so lift it while a book is open to cover the mark and hotbar */
+.scene:has(.book-open) { z-index: 70; animation: none; }
 .book-open {
   position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px;
   background: rgba(21,15,36,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
@@ -452,7 +465,7 @@ kbd {
 .layer-org { margin: -4px 0 10px; color: var(--lantern); font-size: 15px; font-weight: 600; }
 
 /* ── Beacon ────────────────────────────────────────────────── */
-.beacon { min-height: 100svh; display: flex; align-items: flex-end; justify-content: flex-start; padding: 120px var(--gut) 0; max-width: calc(var(--max) + 2 * var(--gut)); margin: 0 auto; }
+.beacon { min-height: calc(100svh - 120px); display: flex; align-items: flex-end; justify-content: flex-start; padding: 120px var(--gut) 0; max-width: calc(var(--max) + 2 * var(--gut)); margin: 0 auto; }
 .world--end .scene { padding-bottom: 120px; }
 .beacon-card { width: min(560px, 100%); padding: clamp(26px, 4vw, 44px); }
 .beacon-card .h1 { font-size: clamp(40px, 5vw, 64px); }
@@ -466,6 +479,9 @@ kbd {
   .work:nth-child(even) .work-shot { order: 0; }
   .work-shot { min-height: 0; aspect-ratio: 16/10; }
   .own { grid-template-columns: 1fr 1fr; }
+  .own > :last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-content: start; }
+  .own > :last-child:nth-child(odd) > :not(.mini-img) { grid-column: 2; }
+  .own > :last-child:nth-child(odd) .mini-img { grid-row: 1 / span 5; margin: 0; aspect-ratio: auto; min-height: 220px; }
   .item-frames { grid-template-columns: 1fr 1fr; }
   .tools-grid { grid-template-columns: 1fr 1fr; }
   .also-row { grid-template-columns: 1fr auto; gap: 4px 12px; }
@@ -484,9 +500,16 @@ kbd {
   .world--island .art-shade { background: linear-gradient(180deg, rgba(29,22,48,.25) 0%, rgba(29,22,48,.4) 40%, rgba(29,22,48,.85) 75%); }
   .hero { align-items: flex-end; padding-top: 120px; padding-bottom: calc(130px + env(safe-area-inset-bottom)); }
   .studio-head { grid-template-columns: 1fr; }
-  .beacon { padding-top: 56svh; }
+  .beacon { padding-top: 22svh; }
+  .book-open { place-items: start center; overflow-y: auto; padding: calc(24px + env(safe-area-inset-top)) 14px 120px; }
+  .beacon-card { padding: 24px 20px 26px; }
+  .beacon-card .lede { margin: 12px 0 22px; }
+  .beacon-links { margin-top: 22px; }
   .studio-count { text-align: left; }
   .own { grid-template-columns: 1fr; }
+  .own > :last-child:nth-child(odd) { display: flex; }
+  .own > :last-child:nth-child(odd) .mini-img { aspect-ratio: 16/10; min-height: 0; margin-bottom: 16px; }
+  .spine--dust { min-width: 12px; }
   .slot { width: 52px; height: 52px; }
   .slot svg { width: 26px; height: 26px; }
   .slot-tip { display: none; }

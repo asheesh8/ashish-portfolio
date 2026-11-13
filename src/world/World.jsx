@@ -19,14 +19,44 @@ import artPortalSm from '../assets/world/portal-sm.webp';
 import artEnd from '../assets/world/end.webp';
 import artEndSm from '../assets/world/end-sm.webp';
 import dragon from '../assets/world/dragon.webp';
+import vidIsland from '../assets/world/island.mp4';
+import vidIslandSm from '../assets/world/island-sm.mp4';
+import vidWorkshop from '../assets/world/workshop.mp4';
+import vidWorkshopSm from '../assets/world/workshop-sm.mp4';
+import vidLibrary from '../assets/world/library.mp4';
+import vidLibrarySm from '../assets/world/library-sm.mp4';
+import vidPortal from '../assets/world/portal.mp4';
+import vidPortalSm from '../assets/world/portal-sm.mp4';
+import vidEnd from '../assets/world/end.mp4';
+import vidEndSm from '../assets/world/end-sm.mp4';
 
 const SCENES = [
-  { id: 'island',   name: 'The island',   hint: 'Home',          art: artIsland,   sm: artIslandSm,   pos: '62% 50%', C: Island },
-  { id: 'workshop', name: 'The workshop', hint: 'What I build',   art: artWorkshop, sm: artWorkshopSm, pos: '40% 50%', C: Workshop },
-  { id: 'library',  name: 'The library',  hint: 'What I studied', art: artLibrary,  sm: artLibrarySm,  pos: '50% 50%', C: Library },
-  { id: 'depths',   name: 'The depths',   hint: 'Where I’ve been', art: artPortal,  sm: artPortalSm,   pos: '50% 50%', C: Depths },
-  { id: 'end',      name: 'The end',      hint: 'Talk to me',     art: artEnd,      sm: artEndSm,      pos: '72% 50%', C: Beacon },
+  { id: 'island',   name: 'The island',   hint: 'Home',          art: artIsland,   sm: artIslandSm,   vid: vidIsland,   vidSm: vidIslandSm,   pos: '62% 50%', C: Island },
+  { id: 'workshop', name: 'The workshop', hint: 'What I build',   art: artWorkshop, sm: artWorkshopSm, vid: vidWorkshop, vidSm: vidWorkshopSm, pos: '40% 50%', C: Workshop },
+  { id: 'library',  name: 'The library',  hint: 'What I studied', art: artLibrary,  sm: artLibrarySm,  vid: vidLibrary,  vidSm: vidLibrarySm,  pos: '50% 50%', C: Library },
+  { id: 'depths',   name: 'The depths',   hint: 'Where I’ve been', art: artPortal,  sm: artPortalSm,   vid: vidPortal,   vidSm: vidPortalSm,   pos: '50% 50%', C: Depths },
+  { id: 'end',      name: 'The end',      hint: 'Talk to me',     art: artEnd,      sm: artEndSm,      vid: vidEnd,      vidSm: vidEndSm,      pos: '72% 50%', C: Beacon },
 ];
+
+// Phones get a portrait crop of each loop; skip video entirely for reduced motion or data saver.
+const small = () => window.matchMedia('(max-width: 700px)').matches;
+const motionOk = () =>
+  !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData;
+
+function SceneVideo({ s }) {
+  const [ready, setReady] = useState(false);
+  const [src] = useState(() => (motionOk() ? (small() ? s.vidSm : s.vid) : null));
+  if (!src) return null;
+  return (
+    <video
+      className={`art-video${ready ? ' is-ready' : ''}`}
+      src={src}
+      autoPlay muted loop playsInline preload="auto"
+      onPlaying={() => setReady(true)}
+      style={{ objectPosition: small() ? '50% 50%' : s.pos }}
+    />
+  );
+}
 
 const fromHash = () => {
   const id = window.location.hash.replace(/^#\/?/, '');
@@ -106,11 +136,14 @@ export default function World() {
   return (
     <div className={`world world--${scene}`}>
       <div className="art" aria-hidden="true">
-        <picture key={scene}>
-          <source media="(max-width: 700px)" srcSet={current.sm} />
-          <img ref={artRef} src={current.art} alt="" style={{ objectPosition: current.pos }} />
-        </picture>
-        {scene === 'end' && (
+        <div className="art-move" ref={artRef} key={scene}>
+          <picture>
+            <source media="(max-width: 700px)" srcSet={current.sm} />
+            <img src={current.art} alt="" style={{ objectPosition: current.pos }} />
+          </picture>
+          <SceneVideo s={current} />
+        </div>
+        {scene === 'end' && !motionOk() && (
           <div className="dragon-path">
             <img className="dragon" src={dragon} alt="" />
           </div>
