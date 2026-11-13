@@ -1,26 +1,17 @@
 # Ashish Subedi — Portfolio
 
-Personal portfolio for Ashish Subedi: about, projects (HomeSHINE, The Pit, Open Box and more), tech stack, services, a blog, and contact.
+Personal portfolio for Ashish Subedi, built as a small block world you travel through. Five scenes, each with its own generated artwork: the island (home and about), the workshop (client and custom work), the library (a bookshelf of standout classes), the depths (experience, newest on top) and the beacon (contact). Moving between them plays a portal transition.
 
 **Live:** https://ashish-portfolio-rust.vercel.app
 
 ## Tech stack
 
-- Vite 8 + React 19 (JavaScript), one CSS file per component
-- A tiny path router (`src/router.js`) — no React Router
-- Light/dark theme via `src/context/ThemeContext.jsx`
-- Blog: built-in posts in `src/data/posts.js` plus drafts written in the browser-only `/admin` editor (`src/utils/postStorage.js`, `localStorage`)
-- `design-preview/` holds standalone HTML/JSX design explorations; it is not part of the build
-
-## Project layout
-
-```
-src/components/   Page sections (Hero, About, Projects, TechStack, Contact, ...)
-src/pages/        Blog index, individual posts, admin editor
-src/data/         Blog post metadata
-src/assets/       Photos and videos used on the site
-public/sw.js      Service worker
-```
+- Vite 8 + React 19 (JavaScript), no router library: scenes live in the URL hash (`/#/library`)
+- `src/world/` holds the whole site: `World.jsx` (scenes, hotbar, parallax), `portal.js` (canvas transition), `Particles.jsx`, `scenes/`, and `world.css`
+- All copy is in `src/world/data.js`
+- Fonts: Fraunces, Hanken Grotesk, Silkscreen (Google Fonts)
+- Artwork in `src/assets/world/` was generated with Higgsfield; client screenshots are in `src/assets/work/`
+- Blog and the browser-only `/admin` editor keep their earlier layout and load from `src/legacy/` only when visited
 
 ## Local setup
 

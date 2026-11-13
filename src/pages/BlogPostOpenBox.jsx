@@ -1,9 +1,9 @@
 import { useReveal } from '../hooks/useReveal';
 import { navigate } from '../router';
-import connectShot from '../assets/projects/bestbuy/openbox-01-connect.png';
-import inventoryShot from '../assets/projects/bestbuy/openbox-02-inventory.png';
-import advisorShot from '../assets/projects/bestbuy/openbox-04-ai-advisor.png';
-import analysisShot from '../assets/projects/bestbuy/openbox-05-analysis.png';
+import connectShot from '../assets/projects/bestbuy/openbox-01-connect.webp';
+import inventoryShot from '../assets/projects/bestbuy/openbox-02-inventory.webp';
+import advisorShot from '../assets/projects/bestbuy/openbox-04-ai-advisor.webp';
+import analysisShot from '../assets/projects/bestbuy/openbox-05-analysis.webp';
 import './BlogPostCar.css';
 
 const TAGS = ['Best Buy API', 'Open Box', 'Retail Tools', 'AI', 'Revenue'];

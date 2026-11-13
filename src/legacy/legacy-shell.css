@@ -1,0 +1,5 @@
+.legacy-bar { position: sticky; top: 0; z-index: 10; display: flex; gap: 24px; padding: 18px 24px;
+  background: rgba(11,11,12,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+.legacy-bar a { color: var(--fg); font-size: 14px; text-decoration: none; }
+.legacy-bar a:first-child::before { content: '\2190\00a0'; }
+.legacy main { padding-top: 24px; }
