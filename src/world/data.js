@@ -55,7 +55,7 @@ export const SHELVES = [
       { code: 'CSI-281', name: 'Data Structures & Algorithms', term: 'Spring 2025', color: 'moss', h: 98,
         note: 'The class everyone warns you about. Trees, graphs, big-O. Glad I took it seriously.' },
       { code: 'CCC-410', name: 'Capstone Design', term: 'Fall 2026', color: 'birch', h: 104,
-        note: 'ClubCRM, with Michael Olave and Noah Sheppard. Taking a one-school prototype and making it work for any school, with school sign-in and FERPA in mind.' },
+        note: 'ClubCRM, with Michael Olave and Noah Sheppard. Taking a one-school prototype and making it work for any school, with school sign-in and FERPA in mind. I own the front end and the UI design.' },
     ],
   },
   {
@@ -173,7 +173,7 @@ export const LAYERS = [
   { layer: 'grass', when: 'Now', title: 'Founder & developer', org: 'Arkitech Solutions',
     body: 'Running my own studio. Finding clients, building their sites and dashboards, and keeping them happy after launch. 40-plus builds so far.' },
   { layer: 'dirt', when: 'Aug 2026 – now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College',
-    body: 'Team of three. My part is collapsing a four-database backend into something we can actually maintain, and shaping the front end.' },
+    body: 'Team of three. I’m on the front end: designing the UI and wiring it up to the backend my teammates are building.' },
   { layer: 'stone', when: 'Aug 2023 – now', title: 'Funded futures trader', org: 'Topstep',
     body: 'I trade NQ on a $200K funded allocation, with $60K+ in funded-account payouts. Strict risk rules, fast decisions, no ego. It’s also why ThePit exists.' },
   { layer: 'deep', when: 'Apr 2023 – now', title: 'Sales', org: 'Best Buy',

@@ -40,7 +40,7 @@ export function travel({ x, y, onSwap, reduced }) {
     col: COLORS[4 + ((Math.random() * 4) | 0)],
   }));
 
-  const IN = 520, HOLD = 380, OUT = 560;
+  const IN = 520, HOLD = 820, OUT = 560;
   let swapped = false;
   const start = performance.now();
 
@@ -79,8 +79,8 @@ export function travel({ x, y, onSwap, reduced }) {
         ctx.globalAlpha = swirlAlpha * 0.85;
         const R = Math.max(W, H) * 0.6;
         const g = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, R);
-        g.addColorStop(0, 'rgba(180,255,240,.9)');
-        g.addColorStop(0.12, 'rgba(68,226,200,.55)');
+        g.addColorStop(0, 'rgba(68,226,200,.45)');
+        g.addColorStop(0.18, 'rgba(68,226,200,.28)');
         g.addColorStop(0.4, 'rgba(107,79,209,.35)');
         g.addColorStop(1, 'rgba(27,18,51,0)');
         ctx.fillStyle = g;

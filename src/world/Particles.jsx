@@ -6,7 +6,7 @@ const MOODS = {
   library:  { colors: ['#44e2c8', '#a17cff', '#ffd88a'], n: 40, vy: -0.18, vx: 0.02, size: [2, 5] },
   workshop: { colors: ['#ff7a3d', '#ffb44d', '#ffd88a'], n: 46, vy: -0.45, vx: 0.08, size: [1, 4] },
   depths:   { colors: ['#ffb44d', '#44e2c8', '#a17cff'], n: 26, vy: -0.08, vx: 0.03, size: [2, 4] },
-  beacon:   { colors: ['#44e2c8', '#a17cff', '#efe6d8'], n: 50, vy: -0.25, vx: 0.0, size: [1, 3] },
+  end:      { colors: ['#a17cff', '#e07cff', '#44e2c8'], n: 56, vy: -0.22, vx: 0.04, size: [2, 5] },
 };
 
 export default function Particles({ mood }) {

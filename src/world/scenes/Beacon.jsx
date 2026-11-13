@@ -5,6 +5,7 @@ export default function Beacon() {
   return (
     <section className="beacon">
       <div className="beacon-card slab">
+        <p className="beacon-kicker">You made it to the end.</p>
         <h1 className="h1">Got something you want built?</h1>
         <p className="lede">
           A site, an app, a dashboard, an internal tool, whatever. Email me. I read everything and I

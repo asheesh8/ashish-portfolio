@@ -57,8 +57,8 @@ a { color: inherit; }
 
 /* ── Art layer ─────────────────────────────────────────────── */
 .art { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--plum-900); }
-.art picture, .art img { width: 100%; height: 100%; }
-.art img {
+.art picture, .art picture img { width: 100%; height: 100%; }
+.art picture img {
   object-fit: cover;
   transform: scale(1.08);
   transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
@@ -75,7 +75,29 @@ a { color: inherit; }
 .world--library .art-shade,
 .world--workshop .art-shade { background: linear-gradient(180deg, rgba(21,15,36,.35) 0%, rgba(21,15,36,.62) 55%, rgba(21,15,36,.82) 100%); }
 .world--depths .art-shade { background: radial-gradient(ellipse at 50% 40%, rgba(21,15,36,.35), rgba(21,15,36,.86) 75%); }
-.world--beacon .art-shade { background: linear-gradient(0deg, rgba(21,15,36,.8) 0%, rgba(21,15,36,.2) 45%, rgba(21,15,36,0) 70%); }
+.world--end .art-shade { background: linear-gradient(0deg, rgba(12,8,22,.85) 0%, rgba(12,8,22,.25) 45%, rgba(12,8,22,0) 70%); }
+
+/* The dragon: circles the pillars, near pass then a far pass back the other way */
+.dragon-path { position: absolute; inset: 0; pointer-events: none; animation: dragon-path 26s linear infinite; }
+.dragon {
+  position: absolute; left: 0; top: 0; width: clamp(300px, 40vw, 640px); height: auto;
+  filter: drop-shadow(0 0 24px rgba(161,124,255,.55)) drop-shadow(0 20px 30px rgba(0,0,0,.6));
+  animation: dragon-bob 2.6s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes dragon-path {
+  0%   { transform: translate(-45vw, 4vh) scale(.9); opacity: 1; }
+  22%  { transform: translate(18vw, 14vh) scale(1) rotate(4deg); }
+  38%  { transform: translate(78vw, 2vh) scale(.8) rotate(-6deg); opacity: 1; }
+  44%  { transform: translate(110vw, -6vh) scale(.6); opacity: 0; }
+  50%  { transform: translate(110vw, 6vh) scale(-.42, .42); opacity: 0; }
+  56%  { transform: translate(85vw, 8vh) scale(-.42, .42); opacity: .85; }
+  86%  { transform: translate(-10vw, 18vh) scale(-.5, .5) rotate(3deg); opacity: .85; }
+  92%  { transform: translate(-50vw, 10vh) scale(-.55, .55); opacity: 0; }
+  100% { transform: translate(-45vw, 4vh) scale(.9); opacity: 0; }
+}
+@keyframes dragon-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -18px; } }
+.beacon-kicker { margin: 0 0 12px; font-family: var(--f-key); font-size: 12px; color: var(--amethyst); }
 
 .particles { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 #portal-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 100; display: none; pointer-events: none; }
@@ -105,19 +127,20 @@ a { color: inherit; }
 @keyframes where-in { from { opacity: 0; transform: translateX(-6px); } }
 
 .arrive {
-  position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; pointer-events: none;
+  position: fixed; inset: 0; z-index: 101; display: grid; place-content: center; justify-items: center; gap: 6px;
+  pointer-events: none; text-align: center; padding: 0 16px;
+  animation: arrive 1.9s linear both;
 }
+.arrive small { font-family: var(--f-key); font-size: 12px; color: #bff5ea; letter-spacing: .08em; }
 .arrive span {
-  font-family: var(--f-display); font-weight: 600; font-variation-settings: 'SOFT' 100, 'opsz' 144;
-  font-size: clamp(40px, 7vw, 96px); color: var(--birch);
-  text-shadow: 0 4px 40px rgba(68,226,200,.55), 0 2px 0 var(--plum-950);
-  animation: arrive 2.1s cubic-bezier(.2,.7,.2,1) both;
+  font-family: var(--f-display); font-weight: 700; font-variation-settings: 'SOFT' 100, 'opsz' 144;
+  font-size: clamp(44px, 9vw, 104px); line-height: 1; color: var(--birch);
+  text-shadow: 0 0 2px var(--plum-950), 0 4px 0 var(--plum-950), 0 0 60px rgba(68,226,200,.6);
+  animation: arrive-word 1.9s cubic-bezier(.2,.7,.2,1) both;
 }
-@keyframes arrive {
-  0% { opacity: 0; transform: translateY(10px) scale(.96); letter-spacing: .02em; }
-  25%, 60% { opacity: 1; transform: none; letter-spacing: 0; }
-  100% { opacity: 0; transform: translateY(-8px); }
-}
+/* matches portal.js timing: blocks cover by ~0.52s, hold, start clearing ~1.34s */
+@keyframes arrive { 0%, 22% { opacity: 0; } 34%, 66% { opacity: 1; } 80%, 100% { opacity: 0; } }
+@keyframes arrive-word { 0%, 22% { transform: scale(.9); filter: blur(8px); } 40% { transform: none; filter: none; } 80%, 100% { transform: scale(1.06); } }
 
 /* ── Hotbar ────────────────────────────────────────────────── */
 .hotbar {
@@ -425,11 +448,12 @@ kbd {
 .layer-org { margin: -4px 0 10px; color: var(--lantern); font-size: 15px; font-weight: 600; }
 
 /* ── Beacon ────────────────────────────────────────────────── */
-.beacon { min-height: 100svh; display: flex; align-items: flex-end; justify-content: center; padding: 120px var(--gut) 0; }
-.world--beacon .scene { padding-bottom: 120px; }
-.beacon-card { width: min(760px, 100%); padding: clamp(28px, 5vw, 56px); text-align: center; }
-.beacon-card .lede { margin: 18px auto 34px; }
-.beacon-links { list-style: none; padding: 0; margin: 34px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; }
+.beacon { min-height: 100svh; display: flex; align-items: flex-end; justify-content: flex-start; padding: 120px var(--gut) 0; max-width: calc(var(--max) + 2 * var(--gut)); margin: 0 auto; }
+.world--end .scene { padding-bottom: 120px; }
+.beacon-card { width: min(560px, 100%); padding: clamp(26px, 4vw, 44px); }
+.beacon-card .h1 { font-size: clamp(40px, 5vw, 64px); }
+.beacon-card .lede { margin: 16px 0 30px; }
+.beacon-links { list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .beacon-foot { margin: 30px 0 0; font-size: 13px; color: var(--birch-3); }
 
 /* ── Small screens ─────────────────────────────────────────── */
@@ -454,8 +478,9 @@ kbd {
 @media (max-width: 700px) {
   body { font-size: 16px; }
   .world--island .art-shade { background: linear-gradient(180deg, rgba(29,22,48,.25) 0%, rgba(29,22,48,.4) 40%, rgba(29,22,48,.85) 75%); }
-  .hero { align-items: flex-end; padding-top: 120px; padding-bottom: 120px; }
+  .hero { align-items: flex-end; padding-top: 120px; padding-bottom: calc(130px + env(safe-area-inset-bottom)); }
   .studio-head { grid-template-columns: 1fr; }
+  .beacon { padding-top: 56svh; }
   .studio-count { text-align: left; }
   .own { grid-template-columns: 1fr; }
   .slot { width: 52px; height: 52px; }
@@ -474,4 +499,5 @@ kbd {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; }
   .arrive { display: none; }
+  .dragon-path { animation: none; transform: translate(6vw, 6vh) scale(.8); }
 }

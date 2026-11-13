@@ -16,15 +16,16 @@ import artWorkshop from '../assets/world/workshop.webp';
 import artWorkshopSm from '../assets/world/workshop-sm.webp';
 import artPortal from '../assets/world/portal.webp';
 import artPortalSm from '../assets/world/portal-sm.webp';
-import artSummit from '../assets/world/summit.webp';
-import artSummitSm from '../assets/world/summit-sm.webp';
+import artEnd from '../assets/world/end.webp';
+import artEndSm from '../assets/world/end-sm.webp';
+import dragon from '../assets/world/dragon.webp';
 
 const SCENES = [
   { id: 'island',   name: 'The island',   hint: 'Home',          art: artIsland,   sm: artIslandSm,   pos: '62% 50%', C: Island },
   { id: 'workshop', name: 'The workshop', hint: 'What I build',   art: artWorkshop, sm: artWorkshopSm, pos: '40% 50%', C: Workshop },
   { id: 'library',  name: 'The library',  hint: 'What I studied', art: artLibrary,  sm: artLibrarySm,  pos: '50% 50%', C: Library },
   { id: 'depths',   name: 'The depths',   hint: 'Where I’ve been', art: artPortal,  sm: artPortalSm,   pos: '50% 50%', C: Depths },
-  { id: 'beacon',   name: 'The beacon',   hint: 'Talk to me',     art: artSummit,   sm: artSummitSm,   pos: '42% 50%', C: Beacon },
+  { id: 'end',      name: 'The end',      hint: 'Talk to me',     art: artEnd,      sm: artEndSm,      pos: '72% 50%', C: Beacon },
 ];
 
 const fromHash = () => {
@@ -35,6 +36,7 @@ const fromHash = () => {
 export default function World() {
   const [scene, setScene] = useState(fromHash);
   const [arrival, setArrival] = useState(0);
+  const [title, setTitle] = useState(null); // shown inside the portal while it covers the screen
   const busy = useRef(false);
   const artRef = useRef(null);
   const reduced = useRef(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -48,6 +50,7 @@ export default function World() {
     else if (e?.currentTarget?.getBoundingClientRect) {
       const r = e.currentTarget.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2;
     }
+    if (!reduced.current) setTitle(SCENES.find((s) => s.id === id).name);
     travel({
       x, y, reduced: reduced.current,
       onSwap: () => {
@@ -56,7 +59,7 @@ export default function World() {
         setArrival((n) => n + 1);
         window.scrollTo(0, 0);
       },
-    }).then(() => { busy.current = false; });
+    }).then(() => { busy.current = false; setTitle(null); });
   }, []);
 
   // back/forward
@@ -107,6 +110,11 @@ export default function World() {
           <source media="(max-width: 700px)" srcSet={current.sm} />
           <img ref={artRef} src={current.art} alt="" style={{ objectPosition: current.pos }} />
         </picture>
+        {scene === 'end' && (
+          <div className="dragon-path">
+            <img className="dragon" src={dragon} alt="" />
+          </div>
+        )}
         <div className="art-shade" />
       </div>
       <Particles mood={scene} />
@@ -116,9 +124,10 @@ export default function World() {
         <span className="mark-where" key={arrival}>{current.name}</span>
       </a>
 
-      {arrival > 0 && (
-        <div className="arrive" key={arrival} aria-hidden="true">
-          <span>{current.name}</span>
+      {title && (
+        <div className="arrive" aria-hidden="true">
+          <small>Entering</small>
+          <span>{title}</span>
         </div>
       )}
 
