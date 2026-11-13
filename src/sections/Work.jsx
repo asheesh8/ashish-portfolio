@@ -36,7 +36,7 @@ export default function Work() {
             <p>
               Most of my client work goes through <strong>ArkiTech Solutions</strong>, the studio I run with
               Terri Ambo out of Burlington. Terri runs the client side. I design and build every site, every
-              dashboard, every line of it. Real businesses, live right now.
+              dashboard, every line of it. 10+ clients so far, real businesses, live right now.
             </p>
             <figure className="work-office">
               <img src={office} alt="Ashish in a conference room with a pizza box and a laptop, lake sunset through the window" loading="lazy" />
@@ -48,7 +48,7 @@ export default function Work() {
         <section className="clients" aria-labelledby="clients-h">
           <div className="clients-top">
             <h3 id="clients-h">Client sites</h3>
-            <a className="textlink" href={LINKS.studioWork} target="_blank" rel="noopener noreferrer">Every live site on arkitech-sol.com <Out /></a>
+            <Button href={LINKS.studio} external variant="ember">Visit arkitech-sol.com</Button>
           </div>
           <ul className="client-list">
             {CLIENTS.map((c) => (
