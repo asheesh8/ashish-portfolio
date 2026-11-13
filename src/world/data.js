@@ -7,7 +7,7 @@ import shotArkitech from '../assets/work/arkitech.webp';
 import shotPainting from '../assets/work/painting.webp';
 import shotElite from '../assets/work/elite.webp';
 import shotJeffs from '../assets/work/jeffs.webp';
-import shotBetterDays from '../assets/work/betterdays.webp';
+import shotInspire from '../assets/work/inspire.webp';
 import shotPit from '../assets/work/thepit.webp';
 import shotOpenBox from '../assets/projects/bestbuy/openbox-01-home.webp';
 import shotHardware from '../assets/projects/hardware/IMG_4290.webp';
@@ -116,15 +116,21 @@ export const STUDIO = {
   title: 'Arkitech Solutions',
   href: LINKS.arkitech,
   shot: shotArkitech,
-  body: 'My studio out of Burlington. Websites, dashboards and AI search for small businesses. Every site is built by me, start to finish, and I run the client side of it on a CRM portal I built myself.',
-  count: '40+',
+  body: 'My studio out of Burlington. Websites, dashboards and AI search for small businesses. Every site is built by me, start to finish.',
+  count: '10+',
+  saas: {
+    title: 'The SaaS behind it',
+    body: 'I also built the software Arkitech runs on: an industrial-level client dashboard and CRM that we sell to clients as a service. A lot of it was inspired by ClubCRM, my capstone that’s being built right now. The next goal is selling it to other software agencies.',
+    href: 'https://arkitech.dev',
+    linkText: 'arkitech.dev',
+  },
   clients: [
     { name: 'Painting With Purpose', where: 'Vermont painting company', shot: shotPainting, href: 'https://paintingwithpurpose01.vercel.app' },
-    { name: 'Elite Real Estate Partners', where: 'Vermont real estate team', shot: shotElite, href: 'https://eliterealestatepartners.vercel.app' },
+    { name: 'Elite Real Estate Partners', where: 'Vermont real estate team', shot: shotElite, href: 'https://elitehomesvermont.com' },
     { name: 'Jeff’s Seafood', where: 'Restaurant, Saint Albans', shot: shotJeffs, href: 'https://jeff-seafood-nine.vercel.app' },
-    { name: 'Better Days Design + Build', where: 'Outdoor living, Nashville', shot: shotBetterDays, href: 'https://betterdays-green.vercel.app' },
+    { name: 'Inspire Campaigns', where: 'Video and marketing studio, Burlington', shot: shotInspire, href: 'https://inspirecampaigns.com' },
   ],
-  more: ['Black Sheep Landscaping', 'Inspire Campaigns', 'CallJoe', 'Palmer Insurance', 'Good Harbor Insurance', 'Mimmo’s Italian', 'Ichiban Ramen', 'Yankee Pedlar’s Shoppe', 'Roger Dixon Custom Carpentry', 'Vermont Exterior Construction'],
+  more: ['Black Sheep Landscaping', 'CallJoe', 'VillageServer Initiative'],
 };
 
 export const OWN = [
@@ -171,7 +177,7 @@ export const TOOLS = [
 
 export const LAYERS = [
   { layer: 'grass', when: 'Now', title: 'Founder & developer', org: 'Arkitech Solutions',
-    body: 'Running my own studio. Finding clients, building their sites and dashboards, and keeping them happy after launch. 40-plus builds so far.' },
+    body: 'Running my own studio. Finding clients, building their sites and dashboards, and keeping them happy after launch. 10-plus clients so far, plus the SaaS dashboard we sell as a service.' },
   { layer: 'dirt', when: 'Aug 2026 – now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College',
     body: 'Team of three. I’m on the front end: designing the UI and wiring it up to the backend my teammates are building.' },
   { layer: 'stone', when: 'Aug 2023 – now', title: 'Funded futures trader', org: 'Topstep',

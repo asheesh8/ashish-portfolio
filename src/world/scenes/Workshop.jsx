@@ -1,5 +1,5 @@
 import { navigate } from '../../router';
-import { Ext } from '../ui';
+import { Btn, Ext } from '../ui';
 import { FEATURED, STUDIO, OWN, ALSO, TOOLS } from '../data';
 
 const openPost = (slug) => { navigate(`/blog/${slug}`); window.scrollTo(0, 0); };
@@ -43,11 +43,11 @@ export default function Workshop() {
             <p className="work-kind">My studio</p>
             <h2 className="h2">{STUDIO.title}</h2>
             <p>{STUDIO.body}</p>
-            <Ext href={STUDIO.href}>arkitech-sol.com</Ext>
+            <Btn href={STUDIO.href} target="_blank" rel="noopener noreferrer">Visit Arkitech Solutions</Btn>
           </div>
           <div className="studio-count">
             <b>{STUDIO.count}</b>
-            <span>sites built for small businesses so far</span>
+            <span>clients so far</span>
           </div>
         </div>
         <div className="item-frames">
@@ -59,7 +59,16 @@ export default function Workshop() {
             </a>
           ))}
         </div>
-        <p className="studio-more">Also: {STUDIO.more.join(', ')}, and a lot more.</p>
+        <p className="studio-more">
+          Also: {STUDIO.more.join(', ')}. See all of it at <Ext href={STUDIO.href}>arkitech-sol.com</Ext>
+        </p>
+        <div className="saas">
+          <div>
+            <h3 className="h3">{STUDIO.saas.title}</h3>
+            <p>{STUDIO.saas.body}</p>
+          </div>
+          <Ext href={STUDIO.saas.href}>{STUDIO.saas.linkText}</Ext>
+        </div>
       </article>
 
       <h2 className="h2 sub">Built for me</h2>
