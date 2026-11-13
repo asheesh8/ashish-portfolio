@@ -1,11 +1,11 @@
 {
   "name": "Ashish Subedi",
   "short_name": "Ashish",
-  "description": "Full-Stack Developer & Freelancer — Burlington, VT",
+  "description": "Websites, apps and tools, built in Burlington, VT",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#04040a",
-  "theme_color": "#04040a",
+  "background_color": "#2c3f47",
+  "theme_color": "#2c3f47",
   "orientation": "portrait-primary",
   "icons": [
     {

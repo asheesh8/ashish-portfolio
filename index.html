@@ -3,33 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Ashish Subedi — Freelance Full-Stack Developer. Building fast, modern web apps." />
-    <meta name="theme-color" content="#04040a" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f4f5fa" media="(prefers-color-scheme: light)" />
+    <title>Ashish Subedi, builder in Burlington, Vermont</title>
+    <meta name="description" content="Ashish Subedi builds websites, apps and the tools behind them out of Burlington, Vermont. Client work, custom builds, experience and school." />
+    <meta property="og:title" content="Ashish Subedi" />
+    <meta property="og:description" content="Websites, apps and the tools behind them. Built in Burlington, Vermont." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#2c3f47" />
 
-    <!-- PWA -->
     <link rel="manifest" href="/manifest.json" />
-    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Ashish" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>Ashish Subedi | Full-Stack Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..700&family=Young+Serif&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {});
-        });
-      }
-    </script>
   </body>
 </html>
