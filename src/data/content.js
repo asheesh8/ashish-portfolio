@@ -50,7 +50,7 @@ export const BUILDS = [
     kind: 'SaaS I built',
     line: 'Client dashboards and CRM, sold as a service.',
     body: 'Our clients pay for it monthly: leads from their site land straight in, they get their own dashboard, and nothing lives in a pile of emails. The studio runs on it too. Next goal is selling it to other software agencies.',
-    stack: ['TypeScript', 'Multi-tenant', 'Client logins'],
+    stack: ['TypeScript', 'SaaS', 'Client logins'],
     links: [['arkitech.dev', LINKS.portal]],
   },
   {
