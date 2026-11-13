@@ -47,10 +47,10 @@ export const BUILDS = [
   {
     id: 'portal',
     name: 'ArkiTech Portal',
-    kind: 'Studio CRM',
-    line: 'The CRM the studio runs on.',
-    body: 'Client sites feed leads straight in, clients get their own dashboards, and nothing lives in a pile of emails anymore. Built it because we needed it first.',
-    stack: ['TypeScript', 'Dashboards', 'Client logins'],
+    kind: 'SaaS I built',
+    line: 'Client dashboards and CRM, sold as a service.',
+    body: 'Our clients pay for it monthly: leads from their site land straight in, they get their own dashboard, and nothing lives in a pile of emails. The studio runs on it too. Next goal is selling it to other software agencies.',
+    stack: ['TypeScript', 'Multi-tenant', 'Client logins'],
     links: [['arkitech.dev', LINKS.portal]],
   },
   {
@@ -92,7 +92,7 @@ export const SMALL_BUILDS = [
 
 // It is a timeline, so it reads top to bottom, newest first.
 export const HOURS = [
-  { when: 'Now', title: 'Co-founder, full-stack designer', org: 'ArkiTech Solutions', body: 'Two-person web studio out of Burlington. Custom websites, the dashboards and CRMs to run them, and getting businesses recommended by AI search.' },
+  { when: 'Now', title: 'Co-founder, full-stack designer', org: 'ArkiTech Solutions', body: 'Two-person web studio out of Burlington. Custom websites, our own SaaS for client dashboards and CRM, and getting businesses recommended by AI search.' },
   { when: 'Aug 2026 to now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College', body: 'Team of three, taking a one-school prototype to something any school can run. I’m on the front end: designing the UI and wiring it up to the backend my teammates are building.' },
   { when: 'Aug 2023 to now', title: 'Funded futures trader', org: 'Topstep', body: 'NQ futures on a $200K funded allocation, $60K+ in funded-account payouts. Strict rules, fast calls, no ego. It’s also why ThePit exists.' },
   { when: 'Apr 2023 to now', title: 'Sales', org: 'Best Buy', body: 'Helping people figure out tech without the jargon. Built Open Box on the side because the floor needed it.' },
