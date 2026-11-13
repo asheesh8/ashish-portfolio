@@ -419,7 +419,16 @@ kbd {
 .saas p { margin: 0; color: var(--birch-2); max-width: 64ch; font-size: 15px; }
 
 .sub { margin-top: 64px; text-shadow: 0 2px 20px rgba(21,15,36,.8); }
-.own { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.own { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+/* Hardware bench: real photos in oak frames */
+.bench { margin-top: 28px; padding: clamp(24px, 3.4vw, 44px); display: grid; grid-template-columns: .8fr 2fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+.bench-head p:not(.work-kind) { color: var(--birch-2); margin: 0; max-width: 40ch; }
+.bench-builds { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.bench-build { margin: 0; display: grid; gap: 16px; align-content: start; }
+.bench-frame { position: relative; display: block; aspect-ratio: 4/3; transform: rotate(-1deg); }
+.bench-build:nth-child(2) .bench-frame { transform: rotate(1.2deg); }
+.bench-build figcaption p:not(.work-kind) { color: var(--birch-2); font-size: 15px; margin: 0 0 10px; }
 .mini { padding: 12px 12px 22px; display: flex; flex-direction: column; }
 .mini > p:not(.work-kind) { color: var(--birch-2); font-size: 15px; margin: 0 0 16px; }
 .mini .work-kind, .mini .h3, .mini > p, .mini .work-foot { padding: 0 10px; }
@@ -479,6 +488,7 @@ kbd {
   .work:nth-child(even) .work-shot { order: 0; }
   .work-shot { min-height: 0; aspect-ratio: 16/10; }
   .own { grid-template-columns: 1fr 1fr; }
+  .bench { grid-template-columns: 1fr; }
   .own > :last-child:nth-child(odd) { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-content: start; }
   .own > :last-child:nth-child(odd) > :not(.mini-img) { grid-column: 2; }
   .own > :last-child:nth-child(odd) .mini-img { grid-row: 1 / span 5; margin: 0; aspect-ratio: auto; min-height: 220px; }
@@ -507,6 +517,7 @@ kbd {
   .beacon-links { margin-top: 22px; }
   .studio-count { text-align: left; }
   .own { grid-template-columns: 1fr; }
+  .bench-builds { grid-template-columns: 1fr; }
   .own > :last-child:nth-child(odd) { display: flex; }
   .own > :last-child:nth-child(odd) .mini-img { aspect-ratio: 16/10; min-height: 0; margin-bottom: 16px; }
   .spine--dust { min-width: 12px; }

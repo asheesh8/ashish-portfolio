@@ -1,6 +1,6 @@
 import { navigate } from '../../router';
 import { Btn, Ext } from '../ui';
-import { FEATURED, STUDIO, OWN, ALSO, TOOLS } from '../data';
+import { FEATURED, STUDIO, OWN, HARDWARE, ALSO, TOOLS } from '../data';
 
 const openPost = (slug) => { navigate(`/blog/${slug}`); window.scrollTo(0, 0); };
 
@@ -87,6 +87,27 @@ export default function Workshop() {
           </article>
         ))}
       </div>
+
+      <section className="bench slab" aria-labelledby="bench-title">
+        <div className="bench-head">
+          <p className="work-kind">Personal builds</p>
+          <h2 className="h2" id="bench-title">On the bench</h2>
+          <p>{HARDWARE.body}</p>
+        </div>
+        <div className="bench-builds">
+          {HARDWARE.builds.map((b) => (
+            <figure className="bench-build" key={b.title}>
+              <span className="frame bench-frame"><img src={b.shot} alt={`${b.title}, ${b.kind.toLowerCase()}`} loading="lazy" /></span>
+              <figcaption>
+                <p className="work-kind">{b.kind}</p>
+                <h3 className="h3">{b.title}</h3>
+                <p>{b.body}</p>
+                <span className="stack">{b.stack.join(', ')}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
       <div className="also">
         {ALSO.map((p) => (

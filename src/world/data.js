@@ -10,7 +10,8 @@ import shotJeffs from '../assets/work/jeffs.webp';
 import shotInspire from '../assets/work/inspire.webp';
 import shotPit from '../assets/work/thepit.webp';
 import shotOpenBox from '../assets/projects/bestbuy/openbox-01-home.webp';
-import shotHardware from '../assets/projects/hardware/IMG_4290.webp';
+import shotTankBot from '../assets/projects/hardware/IMG_0773.webp';
+import shotFootPedal from '../assets/projects/hardware/IMG_4290.webp';
 
 export const LINKS = {
   email: 'mailto:subediashish31@gmail.com',
@@ -150,14 +151,17 @@ export const OWN = [
     body: 'Open-box deals get buried in the system. This pulls them up fast with the Best Buy API and gives floor staff an AI advisor to explain the deal.',
     stack: ['Python', 'React', 'Anthropic API'],
   },
-  {
-    title: 'Mura & other hardware',
-    kind: 'Personal builds',
-    shot: shotHardware,
-    body: 'A tank bot on treads I programmed from scratch, and a DIY foil-pad foot controller. Arduino, C++, a little AVR assembly, a lot of broken wires.',
-    stack: ['Arduino', 'C++', 'AVR'],
-  },
 ];
+
+export const HARDWARE = {
+  body: 'When I’m not writing web apps I’m messing with hardware. Arduino, breadboards, C++, a little AVR assembly. Broken wires, fixing it, breaking it again. Normal stuff.',
+  builds: [
+    { title: 'Mura', kind: 'Tank bot', shot: shotTankBot,
+      body: 'A tank bot on treads. I programmed it from scratch.', stack: ['Arduino', 'C++'] },
+    { title: 'Foil-pad foot pedal', kind: 'DIY controller', shot: shotFootPedal,
+      body: 'A custom step controller. Foil pads you step on, wired up as input. Basically a DIY foot pedal.', stack: ['Arduino', 'C++', 'AVR'] },
+  ],
+};
 
 export const ALSO = [
   { title: 'ClubCRM', kind: 'Senior capstone', body: 'Club management any school can brand as its own, with school sign-in like Canvas.' },
