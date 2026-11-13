@@ -93,7 +93,7 @@ export const SMALL_BUILDS = [
 // It is a timeline, so it reads top to bottom, newest first.
 export const HOURS = [
   { when: 'Now', title: 'Co-founder, full-stack designer', org: 'ArkiTech Solutions', body: 'Two-person web studio out of Burlington. Custom websites, the dashboards and CRMs to run them, and getting businesses recommended by AI search.' },
-  { when: 'Aug 2026 to now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College', body: 'Taking a one-school prototype to something any school can run. My part: collapsing a four-database backend into one you can actually maintain, and the frontend.' },
+  { when: 'Aug 2026 to now', title: 'Capstone engineer', org: 'ClubCRM, Champlain College', body: 'Team of three, taking a one-school prototype to something any school can run. I’m on the front end: designing the UI and wiring it up to the backend my teammates are building.' },
   { when: 'Aug 2023 to now', title: 'Funded futures trader', org: 'Topstep', body: 'NQ futures on a $200K funded allocation, $60K+ in funded-account payouts. Strict rules, fast calls, no ego. It’s also why ThePit exists.' },
   { when: 'Apr 2023 to now', title: 'Sales', org: 'Best Buy', body: 'Helping people figure out tech without the jargon. Built Open Box on the side because the floor needed it.' },
   { when: 'Mar to Jun 2023', title: 'Research intern', org: 'Essex Junction Recreation Dept.', body: 'Went through decades of water-quality data to find the best treatment temperatures, and designed public brochures on PFOS and PFAS.' },
